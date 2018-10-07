@@ -29,7 +29,8 @@ namespace ANSIS_V3
                 var returnedBooks = from pb in db.ProcessBooks
                                     where pb.BookID == book.BookID && pb.BookReturn!=null
                                     select pb;
-                dgvBookInven.Rows.Add(book.Bookname, releasedBooks.Count(),returnedBooks.Count());
+                int quatity = book.BookQuantity - releasedBooks.Count() + returnedBooks.Count();
+                dgvBookInven.Rows.Add(book.Bookname,quatity, releasedBooks.Count(),returnedBooks.Count());
             }
         }
     }

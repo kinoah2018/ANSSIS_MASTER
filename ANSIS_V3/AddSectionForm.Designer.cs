@@ -303,6 +303,7 @@
             this.MinimizeBox = false;
             this.Name = "AddSectionForm";
             this.Text = "Add Section Form";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddSectionForm_FormClosed);
             this.Load += new System.EventHandler(this.AddSectionForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mdgvAddSection)).EndInit();
             this.ResumeLayout(false);

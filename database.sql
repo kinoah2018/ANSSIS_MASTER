@@ -88,7 +88,8 @@ create table Subject
 )
 alter table Subject
 add YearLevel varchar(50)
-
+select * from StudentPayment
+delete from payment
 create table Payment
 (
 	PaymentID int primary key identity(1,1),
@@ -140,9 +141,10 @@ create table RequiOfRequirement
 create table Inquiry
 (
 	InquiryID int primary key identity(1,1),
-	InquiryFor  varchar(50) not null,
-	InquiryDesc  varchar(50) not null,
-	Creator varchar(50) not null
+	InquiryConcern  varchar(50) not null,
+	StudentID int foreign key references Student(StudentID),
+	Status varchar(50) not null,
+	InqAnswer varchar(50)null
 )
 
 create table UserSecurity
@@ -163,13 +165,15 @@ create table StudentGrade
 	Period varchar(50) not null,
 	SchoolyearID int foreign key references Schoolyear(SchoolyearID)
 )
-
+select * from Payment
+select * from Schoolyear
+select * from StudentPayment
 create table StudentPayment
 (
 	StudentPaymentID int primary key identity(1,1),
 	StudentID int foreign key references Student(StudentID),
 	Amount decimal(6,2) not null,
-	PaymentType varchar(50) not null,
+	PaymentID int foreign key references Payment(PaymentID),
 	Date datetime not null
 )
 

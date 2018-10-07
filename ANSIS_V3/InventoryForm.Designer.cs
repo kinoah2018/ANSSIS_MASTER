@@ -35,6 +35,7 @@
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
             this.dgvBookInven = new MetroFramework.Controls.MetroGrid();
             this.Book = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Released = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Returned = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookInven)).BeginInit();
@@ -100,6 +101,7 @@
             this.dgvBookInven.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBookInven.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Book,
+            this.Quantity,
             this.Released,
             this.Returned});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -136,6 +138,12 @@
             this.Book.Name = "Book";
             this.Book.ReadOnly = true;
             // 
+            // Quantity
+            // 
+            this.Quantity.HeaderText = "Quantity";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            // 
             // Released
             // 
             this.Released.HeaderText = "Released";
@@ -171,6 +179,7 @@
         private MetroFramework.Controls.MetroTextBox txtSearch;
         private MetroFramework.Controls.MetroGrid dgvBookInven;
         private System.Windows.Forms.DataGridViewTextBoxColumn Book;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn Released;
         private System.Windows.Forms.DataGridViewTextBoxColumn Returned;
 

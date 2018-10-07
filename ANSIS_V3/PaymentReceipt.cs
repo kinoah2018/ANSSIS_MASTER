@@ -19,8 +19,8 @@ namespace ANSIS_V3
             InitializeComponent();
             printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
         }
-        string sname, patype, coh, amnt, chng;
-        public PaymentReceipt(string studname, string paymenttype, string cashonhand, string amount, string change)
+        string sname, patype, coh, amnt, chng,id;
+        public PaymentReceipt(string studid,string studname, string paymenttype, string cashonhand, string amount, string change)
         {
             InitializeComponent();
             printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
@@ -29,6 +29,7 @@ namespace ANSIS_V3
             coh = cashonhand;
             amnt = amount;
             chng = change;
+            id = studid;
         }
         Bitmap MemoryImage;
         public void GetPrintArea(Panel pnl)
@@ -59,6 +60,7 @@ namespace ANSIS_V3
             lblSpaytype.Text = patype;
             lblCOH.Text = coh;
             lblDate.Text = DateTime.Now.ToShortDateString();
+            lblStudID.Text = id;
         }
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {

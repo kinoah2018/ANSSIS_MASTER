@@ -13,6 +13,7 @@
       <Column Name="Payment" Member="Payment1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Amount" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" CanBeNull="false" />
       <Column Name="SchoolyearID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Payment_StudentPayment" Member="StudentPayments" ThisKey="PaymentID" OtherKey="PaymentID" Type="StudentPayment" />
       <Association Name="Schoolyear_Payment" Member="Schoolyear" ThisKey="SchoolyearID" OtherKey="SchoolyearID" Type="Schoolyear" IsForeignKey="true" />
     </Type>
   </Table>
@@ -75,9 +76,10 @@
       <Column Name="SectionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SchoolyearID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Student_StudentGrade" Member="StudentGrades" ThisKey="StudentID" OtherKey="StudentID" Type="StudentGrade" />
-      <Association Name="Student_StudentPayment" Member="StudentPayments" ThisKey="StudentID" OtherKey="StudentID" Type="StudentPayment" />
       <Association Name="Student_RequiOfRequirement" Member="RequiOfRequirements" ThisKey="StudentID" OtherKey="StudentID" Type="RequiOfRequirement" />
       <Association Name="Student_ProcessBook" Member="ProcessBooks" ThisKey="StudentID" OtherKey="StudentID" Type="ProcessBook" />
+      <Association Name="Student_Inquiry" Member="Inquiries" ThisKey="StudentID" OtherKey="StudentID" Type="Inquiry" />
+      <Association Name="Student_StudentPayment" Member="StudentPayments" ThisKey="StudentID" OtherKey="StudentID" Type="StudentPayment" />
       <Association Name="Schoolyear_Student" Member="Schoolyear" ThisKey="SchoolyearID" OtherKey="SchoolyearID" Type="Schoolyear" IsForeignKey="true" />
       <Association Name="Section_Student" Member="Section" ThisKey="SectionID" OtherKey="SectionID" Type="Section" IsForeignKey="true" />
     </Type>
@@ -94,16 +96,6 @@
       <Association Name="Schoolyear_StudentGrade" Member="Schoolyear" ThisKey="SchoolyearID" OtherKey="SchoolyearID" Type="Schoolyear" IsForeignKey="true" />
       <Association Name="Student_StudentGrade" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
       <Association Name="Subject_StudentGrade" Member="Subject" ThisKey="SubjectID" OtherKey="SubjectID" Type="Subject" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.StudentPayment" Member="StudentPayments">
-    <Type Name="StudentPayment">
-      <Column Name="StudentPaymentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" CanBeNull="false" />
-      <Column Name="PaymentType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="Student_StudentPayment" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Subject" Member="Subjects">
@@ -204,9 +196,22 @@
   <Table Name="dbo.Inquiry" Member="Inquiries">
     <Type Name="Inquiry">
       <Column Name="InquiryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="InquiryFor" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="InquiryDesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Creator" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InquiryConcern" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InqAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Student_Inquiry" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StudentPayment" Member="StudentPayments">
+    <Type Name="StudentPayment">
+      <Column Name="StudentPaymentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Payment_StudentPayment" Member="Payment" ThisKey="PaymentID" OtherKey="PaymentID" Type="Payment" IsForeignKey="true" />
+      <Association Name="Student_StudentPayment" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -51,9 +51,6 @@ namespace ANSIS_V3
     partial void InsertStudentGrade(StudentGrade instance);
     partial void UpdateStudentGrade(StudentGrade instance);
     partial void DeleteStudentGrade(StudentGrade instance);
-    partial void InsertStudentPayment(StudentPayment instance);
-    partial void UpdateStudentPayment(StudentPayment instance);
-    partial void DeleteStudentPayment(StudentPayment instance);
     partial void InsertSubject(Subject instance);
     partial void UpdateSubject(Subject instance);
     partial void DeleteSubject(Subject instance);
@@ -81,6 +78,9 @@ namespace ANSIS_V3
     partial void InsertInquiry(Inquiry instance);
     partial void UpdateInquiry(Inquiry instance);
     partial void DeleteInquiry(Inquiry instance);
+    partial void InsertStudentPayment(StudentPayment instance);
+    partial void UpdateStudentPayment(StudentPayment instance);
+    partial void DeleteStudentPayment(StudentPayment instance);
     #endregion
 		
 		public DataClassDataContext() : 
@@ -169,14 +169,6 @@ namespace ANSIS_V3
 			}
 		}
 		
-		public System.Data.Linq.Table<StudentPayment> StudentPayments
-		{
-			get
-			{
-				return this.GetTable<StudentPayment>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Subject> Subjects
 		{
 			get
@@ -246,6 +238,14 @@ namespace ANSIS_V3
 			get
 			{
 				return this.GetTable<Inquiry>();
+			}
+		}
+		
+		public System.Data.Linq.Table<StudentPayment> StudentPayments
+		{
+			get
+			{
+				return this.GetTable<StudentPayment>();
 			}
 		}
 	}
@@ -378,6 +378,8 @@ namespace ANSIS_V3
 		
 		private System.Nullable<int> _SchoolyearID;
 		
+		private EntitySet<StudentPayment> _StudentPayments;
+		
 		private EntityRef<Schoolyear> _Schoolyear;
 		
     #region Extensibility Method Definitions
@@ -396,6 +398,7 @@ namespace ANSIS_V3
 		
 		public Payment()
 		{
+			this._StudentPayments = new EntitySet<StudentPayment>(new Action<StudentPayment>(this.attach_StudentPayments), new Action<StudentPayment>(this.detach_StudentPayments));
 			this._Schoolyear = default(EntityRef<Schoolyear>);
 			OnCreated();
 		}
@@ -484,6 +487,19 @@ namespace ANSIS_V3
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Payment_StudentPayment", Storage="_StudentPayments", ThisKey="PaymentID", OtherKey="PaymentID")]
+		public EntitySet<StudentPayment> StudentPayments
+		{
+			get
+			{
+				return this._StudentPayments;
+			}
+			set
+			{
+				this._StudentPayments.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Schoolyear_Payment", Storage="_Schoolyear", ThisKey="SchoolyearID", OtherKey="SchoolyearID", IsForeignKey=true)]
 		public Schoolyear Schoolyear
 		{
@@ -536,6 +552,18 @@ namespace ANSIS_V3
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_StudentPayments(StudentPayment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Payment = this;
+		}
+		
+		private void detach_StudentPayments(StudentPayment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Payment = null;
 		}
 	}
 	
@@ -1325,11 +1353,13 @@ namespace ANSIS_V3
 		
 		private EntitySet<StudentGrade> _StudentGrades;
 		
-		private EntitySet<StudentPayment> _StudentPayments;
-		
 		private EntitySet<RequiOfRequirement> _RequiOfRequirements;
 		
 		private EntitySet<ProcessBook> _ProcessBooks;
+		
+		private EntitySet<Inquiry> _Inquiries;
+		
+		private EntitySet<StudentPayment> _StudentPayments;
 		
 		private EntityRef<Schoolyear> _Schoolyear;
 		
@@ -1388,9 +1418,10 @@ namespace ANSIS_V3
 		public Student()
 		{
 			this._StudentGrades = new EntitySet<StudentGrade>(new Action<StudentGrade>(this.attach_StudentGrades), new Action<StudentGrade>(this.detach_StudentGrades));
-			this._StudentPayments = new EntitySet<StudentPayment>(new Action<StudentPayment>(this.attach_StudentPayments), new Action<StudentPayment>(this.detach_StudentPayments));
 			this._RequiOfRequirements = new EntitySet<RequiOfRequirement>(new Action<RequiOfRequirement>(this.attach_RequiOfRequirements), new Action<RequiOfRequirement>(this.detach_RequiOfRequirements));
 			this._ProcessBooks = new EntitySet<ProcessBook>(new Action<ProcessBook>(this.attach_ProcessBooks), new Action<ProcessBook>(this.detach_ProcessBooks));
+			this._Inquiries = new EntitySet<Inquiry>(new Action<Inquiry>(this.attach_Inquiries), new Action<Inquiry>(this.detach_Inquiries));
+			this._StudentPayments = new EntitySet<StudentPayment>(new Action<StudentPayment>(this.attach_StudentPayments), new Action<StudentPayment>(this.detach_StudentPayments));
 			this._Schoolyear = default(EntityRef<Schoolyear>);
 			this._Section = default(EntityRef<Section>);
 			OnCreated();
@@ -1857,19 +1888,6 @@ namespace ANSIS_V3
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_StudentPayment", Storage="_StudentPayments", ThisKey="StudentID", OtherKey="StudentID")]
-		public EntitySet<StudentPayment> StudentPayments
-		{
-			get
-			{
-				return this._StudentPayments;
-			}
-			set
-			{
-				this._StudentPayments.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_RequiOfRequirement", Storage="_RequiOfRequirements", ThisKey="StudentID", OtherKey="StudentID")]
 		public EntitySet<RequiOfRequirement> RequiOfRequirements
 		{
@@ -1893,6 +1911,32 @@ namespace ANSIS_V3
 			set
 			{
 				this._ProcessBooks.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Inquiry", Storage="_Inquiries", ThisKey="StudentID", OtherKey="StudentID")]
+		public EntitySet<Inquiry> Inquiries
+		{
+			get
+			{
+				return this._Inquiries;
+			}
+			set
+			{
+				this._Inquiries.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_StudentPayment", Storage="_StudentPayments", ThisKey="StudentID", OtherKey="StudentID")]
+		public EntitySet<StudentPayment> StudentPayments
+		{
+			get
+			{
+				return this._StudentPayments;
+			}
+			set
+			{
+				this._StudentPayments.Assign(value);
 			}
 		}
 		
@@ -1996,18 +2040,6 @@ namespace ANSIS_V3
 			entity.Student = null;
 		}
 		
-		private void attach_StudentPayments(StudentPayment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Student = this;
-		}
-		
-		private void detach_StudentPayments(StudentPayment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Student = null;
-		}
-		
 		private void attach_RequiOfRequirements(RequiOfRequirement entity)
 		{
 			this.SendPropertyChanging();
@@ -2027,6 +2059,30 @@ namespace ANSIS_V3
 		}
 		
 		private void detach_ProcessBooks(ProcessBook entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = null;
+		}
+		
+		private void attach_Inquiries(Inquiry entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = this;
+		}
+		
+		private void detach_Inquiries(Inquiry entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = null;
+		}
+		
+		private void attach_StudentPayments(StudentPayment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = this;
+		}
+		
+		private void detach_StudentPayments(StudentPayment entity)
 		{
 			this.SendPropertyChanging();
 			entity.Student = null;
@@ -2337,205 +2393,6 @@ namespace ANSIS_V3
 						this._SubjectID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Subject");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StudentPayment")]
-	public partial class StudentPayment : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _StudentPaymentID;
-		
-		private System.Nullable<int> _StudentID;
-		
-		private decimal _Amount;
-		
-		private string _PaymentType;
-		
-		private System.DateTime _Date;
-		
-		private EntityRef<Student> _Student;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnStudentPaymentIDChanging(int value);
-    partial void OnStudentPaymentIDChanged();
-    partial void OnStudentIDChanging(System.Nullable<int> value);
-    partial void OnStudentIDChanged();
-    partial void OnAmountChanging(decimal value);
-    partial void OnAmountChanged();
-    partial void OnPaymentTypeChanging(string value);
-    partial void OnPaymentTypeChanged();
-    partial void OnDateChanging(System.DateTime value);
-    partial void OnDateChanged();
-    #endregion
-		
-		public StudentPayment()
-		{
-			this._Student = default(EntityRef<Student>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentPaymentID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int StudentPaymentID
-		{
-			get
-			{
-				return this._StudentPaymentID;
-			}
-			set
-			{
-				if ((this._StudentPaymentID != value))
-				{
-					this.OnStudentPaymentIDChanging(value);
-					this.SendPropertyChanging();
-					this._StudentPaymentID = value;
-					this.SendPropertyChanged("StudentPaymentID");
-					this.OnStudentPaymentIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int")]
-		public System.Nullable<int> StudentID
-		{
-			get
-			{
-				return this._StudentID;
-			}
-			set
-			{
-				if ((this._StudentID != value))
-				{
-					if (this._Student.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnStudentIDChanging(value);
-					this.SendPropertyChanging();
-					this._StudentID = value;
-					this.SendPropertyChanged("StudentID");
-					this.OnStudentIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Decimal(6,2) NOT NULL")]
-		public decimal Amount
-		{
-			get
-			{
-				return this._Amount;
-			}
-			set
-			{
-				if ((this._Amount != value))
-				{
-					this.OnAmountChanging(value);
-					this.SendPropertyChanging();
-					this._Amount = value;
-					this.SendPropertyChanged("Amount");
-					this.OnAmountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string PaymentType
-		{
-			get
-			{
-				return this._PaymentType;
-			}
-			set
-			{
-				if ((this._PaymentType != value))
-				{
-					this.OnPaymentTypeChanging(value);
-					this.SendPropertyChanging();
-					this._PaymentType = value;
-					this.SendPropertyChanged("PaymentType");
-					this.OnPaymentTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_StudentPayment", Storage="_Student", ThisKey="StudentID", OtherKey="StudentID", IsForeignKey=true)]
-		public Student Student
-		{
-			get
-			{
-				return this._Student.Entity;
-			}
-			set
-			{
-				Student previousValue = this._Student.Entity;
-				if (((previousValue != value) 
-							|| (this._Student.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Student.Entity = null;
-						previousValue.StudentPayments.Remove(this);
-					}
-					this._Student.Entity = value;
-					if ((value != null))
-					{
-						value.StudentPayments.Add(this);
-						this._StudentID = value.StudentID;
-					}
-					else
-					{
-						this._StudentID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Student");
 				}
 			}
 		}
@@ -4553,11 +4410,15 @@ namespace ANSIS_V3
 		
 		private int _InquiryID;
 		
-		private string _InquiryFor;
+		private string _InquiryConcern;
 		
-		private string _InquiryDesc;
+		private System.Nullable<int> _StudentID;
 		
-		private string _Creator;
+		private string _Status;
+		
+		private string _InqAnswer;
+		
+		private EntityRef<Student> _Student;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -4565,16 +4426,19 @@ namespace ANSIS_V3
     partial void OnCreated();
     partial void OnInquiryIDChanging(int value);
     partial void OnInquiryIDChanged();
-    partial void OnInquiryForChanging(string value);
-    partial void OnInquiryForChanged();
-    partial void OnInquiryDescChanging(string value);
-    partial void OnInquiryDescChanged();
-    partial void OnCreatorChanging(string value);
-    partial void OnCreatorChanged();
+    partial void OnInquiryConcernChanging(string value);
+    partial void OnInquiryConcernChanged();
+    partial void OnStudentIDChanging(System.Nullable<int> value);
+    partial void OnStudentIDChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    partial void OnInqAnswerChanging(string value);
+    partial void OnInqAnswerChanged();
     #endregion
 		
 		public Inquiry()
 		{
+			this._Student = default(EntityRef<Student>);
 			OnCreated();
 		}
 		
@@ -4598,62 +4462,360 @@ namespace ANSIS_V3
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InquiryFor", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string InquiryFor
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InquiryConcern", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string InquiryConcern
 		{
 			get
 			{
-				return this._InquiryFor;
+				return this._InquiryConcern;
 			}
 			set
 			{
-				if ((this._InquiryFor != value))
+				if ((this._InquiryConcern != value))
 				{
-					this.OnInquiryForChanging(value);
+					this.OnInquiryConcernChanging(value);
 					this.SendPropertyChanging();
-					this._InquiryFor = value;
-					this.SendPropertyChanged("InquiryFor");
-					this.OnInquiryForChanged();
+					this._InquiryConcern = value;
+					this.SendPropertyChanged("InquiryConcern");
+					this.OnInquiryConcernChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InquiryDesc", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string InquiryDesc
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int")]
+		public System.Nullable<int> StudentID
 		{
 			get
 			{
-				return this._InquiryDesc;
+				return this._StudentID;
 			}
 			set
 			{
-				if ((this._InquiryDesc != value))
+				if ((this._StudentID != value))
 				{
-					this.OnInquiryDescChanging(value);
+					if (this._Student.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStudentIDChanging(value);
 					this.SendPropertyChanging();
-					this._InquiryDesc = value;
-					this.SendPropertyChanged("InquiryDesc");
-					this.OnInquiryDescChanged();
+					this._StudentID = value;
+					this.SendPropertyChanged("StudentID");
+					this.OnStudentIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Creator", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Creator
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Status
 		{
 			get
 			{
-				return this._Creator;
+				return this._Status;
 			}
 			set
 			{
-				if ((this._Creator != value))
+				if ((this._Status != value))
 				{
-					this.OnCreatorChanging(value);
+					this.OnStatusChanging(value);
 					this.SendPropertyChanging();
-					this._Creator = value;
-					this.SendPropertyChanged("Creator");
-					this.OnCreatorChanged();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InqAnswer", DbType="VarChar(50)")]
+		public string InqAnswer
+		{
+			get
+			{
+				return this._InqAnswer;
+			}
+			set
+			{
+				if ((this._InqAnswer != value))
+				{
+					this.OnInqAnswerChanging(value);
+					this.SendPropertyChanging();
+					this._InqAnswer = value;
+					this.SendPropertyChanged("InqAnswer");
+					this.OnInqAnswerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Inquiry", Storage="_Student", ThisKey="StudentID", OtherKey="StudentID", IsForeignKey=true)]
+		public Student Student
+		{
+			get
+			{
+				return this._Student.Entity;
+			}
+			set
+			{
+				Student previousValue = this._Student.Entity;
+				if (((previousValue != value) 
+							|| (this._Student.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Student.Entity = null;
+						previousValue.Inquiries.Remove(this);
+					}
+					this._Student.Entity = value;
+					if ((value != null))
+					{
+						value.Inquiries.Add(this);
+						this._StudentID = value.StudentID;
+					}
+					else
+					{
+						this._StudentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StudentPayment")]
+	public partial class StudentPayment : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _StudentPaymentID;
+		
+		private System.Nullable<int> _StudentID;
+		
+		private decimal _Amount;
+		
+		private System.Nullable<int> _PaymentID;
+		
+		private System.DateTime _Date;
+		
+		private EntityRef<Payment> _Payment;
+		
+		private EntityRef<Student> _Student;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnStudentPaymentIDChanging(int value);
+    partial void OnStudentPaymentIDChanged();
+    partial void OnStudentIDChanging(System.Nullable<int> value);
+    partial void OnStudentIDChanged();
+    partial void OnAmountChanging(decimal value);
+    partial void OnAmountChanged();
+    partial void OnPaymentIDChanging(System.Nullable<int> value);
+    partial void OnPaymentIDChanged();
+    partial void OnDateChanging(System.DateTime value);
+    partial void OnDateChanged();
+    #endregion
+		
+		public StudentPayment()
+		{
+			this._Payment = default(EntityRef<Payment>);
+			this._Student = default(EntityRef<Student>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentPaymentID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int StudentPaymentID
+		{
+			get
+			{
+				return this._StudentPaymentID;
+			}
+			set
+			{
+				if ((this._StudentPaymentID != value))
+				{
+					this.OnStudentPaymentIDChanging(value);
+					this.SendPropertyChanging();
+					this._StudentPaymentID = value;
+					this.SendPropertyChanged("StudentPaymentID");
+					this.OnStudentPaymentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int")]
+		public System.Nullable<int> StudentID
+		{
+			get
+			{
+				return this._StudentID;
+			}
+			set
+			{
+				if ((this._StudentID != value))
+				{
+					if (this._Student.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStudentIDChanging(value);
+					this.SendPropertyChanging();
+					this._StudentID = value;
+					this.SendPropertyChanged("StudentID");
+					this.OnStudentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Decimal(6,2) NOT NULL")]
+		public decimal Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentID", DbType="Int")]
+		public System.Nullable<int> PaymentID
+		{
+			get
+			{
+				return this._PaymentID;
+			}
+			set
+			{
+				if ((this._PaymentID != value))
+				{
+					if (this._Payment.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPaymentIDChanging(value);
+					this.SendPropertyChanging();
+					this._PaymentID = value;
+					this.SendPropertyChanged("PaymentID");
+					this.OnPaymentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Payment_StudentPayment", Storage="_Payment", ThisKey="PaymentID", OtherKey="PaymentID", IsForeignKey=true)]
+		public Payment Payment
+		{
+			get
+			{
+				return this._Payment.Entity;
+			}
+			set
+			{
+				Payment previousValue = this._Payment.Entity;
+				if (((previousValue != value) 
+							|| (this._Payment.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Payment.Entity = null;
+						previousValue.StudentPayments.Remove(this);
+					}
+					this._Payment.Entity = value;
+					if ((value != null))
+					{
+						value.StudentPayments.Add(this);
+						this._PaymentID = value.PaymentID;
+					}
+					else
+					{
+						this._PaymentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Payment");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_StudentPayment", Storage="_Student", ThisKey="StudentID", OtherKey="StudentID", IsForeignKey=true)]
+		public Student Student
+		{
+			get
+			{
+				return this._Student.Entity;
+			}
+			set
+			{
+				Student previousValue = this._Student.Entity;
+				if (((previousValue != value) 
+							|| (this._Student.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Student.Entity = null;
+						previousValue.StudentPayments.Remove(this);
+					}
+					this._Student.Entity = value;
+					if ((value != null))
+					{
+						value.StudentPayments.Add(this);
+						this._StudentID = value.StudentID;
+					}
+					else
+					{
+						this._StudentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Student");
 				}
 			}
 		}

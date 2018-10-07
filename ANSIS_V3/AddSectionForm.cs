@@ -135,5 +135,10 @@ namespace ANSIS_V3
 				mbtnClear.Text = "Clear";
 			}
 		}
+
+        private void AddSectionForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+        }
 	}
 }

@@ -184,76 +184,46 @@ namespace ANSIS_V3
         }
         public void displayBalance()
         {
-            dgvBalanceofStud.Rows.Clear();
-            var studs = from s in db.Students
-                        select s;
-            foreach (var stud in studs)
+            double totalbalance;
+            double bookpenalty;
+            double payed;
+            var stud = from s in db.Students
+                       select s;
+            foreach (var s in stud)
             {
-                var studpay = from s in db.StudentPayments
-                          where s.StudentID == stud.StudentID && s.PaymentType == "Parent Teacher Association - (PTA)"
-                          select s;
-            var studpayedbook = from s in db.StudentPayments
-                                where s.StudentID == stud.StudentID && s.PaymentType == "Book Penalty"
-                                select s;
-            var bookpay = from b in db.ProcessBooks
-                          where b.StudentID == stud.StudentID && b.BookReturn == null
-                          select b;
-            double totalBalance = 0;
-            double ptapayments = 0;
-            double bookpayments = 0;
-            double payedbooks = 0;
-            bookpayments = bookpay.Count() * 100;
-            foreach (var sp in studpay)
+                var balance = from p in db.Payments join sc in db.Schoolyears on p.SchoolyearID equals sc.SchoolyearID
+                          where p.Payment1 != "Book Penalty" && p.Payment1 != "Second Issue of Certificate"
+                          select p;
+            totalbalance = 0;
+            foreach (var bal in balance)
             {
-                ptapayments += double.Parse(sp.Amount.ToString());
+                totalbalance += double.Parse(bal.Amount.ToString());
             }
-            foreach (var spb in studpayedbook)
+            var unreturnedbooks = from p in db.ProcessBooks
+                              where p.StudentID == s.StudentID && p.BookReturn == null
+                              select p;
+            var bookamount = (from p in db.Payments
+                              where p.Payment1 == "Book Penalty"
+                              select p).FirstOrDefault();
+            bookpenalty = unreturnedbooks.Count() * double.Parse(bookamount.Amount.ToString());
+            var studpay = from sp in db.StudentPayments
+                          join p in db.Payments on sp.PaymentID equals p.PaymentID
+                          where p.Payment1 != "Second Issue of Certificate" && sp.StudentID==s.StudentID
+                          select sp;
+            payed = 0;
+            foreach (var studp in studpay)
             {
-                payedbooks += double.Parse(spb.Amount.ToString());
+                payed += double.Parse(studp.Amount.ToString());
             }
-            bookpayments = bookpayments - payedbooks;
-            ptapayments = 750 - ptapayments;
-            totalBalance = ptapayments + bookpayments;
-            dgvBalanceofStud.Rows.Add(stud.StudentID, stud.Firstname + " " + stud.Lastname, totalBalance);
+            totalbalance= ((totalbalance + bookpenalty) - payed);
+            dgvBalanceofStud.Rows.Add(s.StudentID, s.Firstname + " " + s.Lastname, totalbalance);
             }
-           
         }
 
         private void txtBalanceSearch_TextChanged(object sender, EventArgs e)
         {
             dgvBalanceofStud.Rows.Clear();
-            var studs = from s in db.Students
-                        where s.Firstname.Contains(txtBalanceSearch.Text) || s.Lastname.Contains(txtBalanceSearch.Text)
-                        select s;
-            foreach (var stud in studs)
-            {
-                var studpay = from s in db.StudentPayments
-                              where s.StudentID == stud.StudentID && s.PaymentType == "Parent Teacher Association - (PTA)"
-                              select s;
-                var studpayedbook = from s in db.StudentPayments
-                                    where s.StudentID == stud.StudentID && s.PaymentType == "Book Penalty"
-                                    select s;
-                var bookpay = from b in db.ProcessBooks
-                              where b.StudentID == stud.StudentID && b.BookReturn == null
-                              select b;
-                double totalBalance = 0;
-                double ptapayments = 0;
-                double bookpayments = 0;
-                double payedbooks = 0;
-                bookpayments = bookpay.Count() * 100;
-                foreach (var sp in studpay)
-                {
-                    ptapayments += double.Parse(sp.Amount.ToString());
-                }
-                foreach (var spb in studpayedbook)
-                {
-                    payedbooks += double.Parse(spb.Amount.ToString());
-                }
-                bookpayments = bookpayments - payedbooks;
-                ptapayments = 750 - ptapayments;
-                totalBalance = ptapayments + bookpayments;
-                dgvBalanceofStud.Rows.Add(stud.StudentID, stud.Firstname + " " + stud.Lastname, totalBalance);
-            }
+            
         }
 
         private void cmbHonorYear_SelectedIndexChanged(object sender, EventArgs e)

@@ -64,6 +64,8 @@
             this.metroLabel28 = new MetroFramework.Controls.MetroLabel();
             this.dgvSchedule = new MetroFramework.Controls.MetroGrid();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cmbYearlevel = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
             this.cmbSectionname = new MetroFramework.Controls.MetroComboBox();
             this.btnAddSched = new MetroFramework.Controls.MetroButton();
             this.txtTID = new MetroFramework.Controls.MetroTextBox();
@@ -76,6 +78,8 @@
             this.metroLabel24 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel20 = new MetroFramework.Controls.MetroLabel();
             this.mtpSubject = new MetroFramework.Controls.MetroTabPage();
+            this.cmbSubYearlvl = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
             this.cmbSub = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.btnSubCancel = new MetroFramework.Controls.MetroButton();
@@ -83,10 +87,6 @@
             this.dgvSubject = new MetroFramework.Controls.MetroGrid();
             this.txtSearchsub = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
-            this.cmbYearlevel = new MetroFramework.Controls.MetroComboBox();
-            this.cmbSubYearlvl = new MetroFramework.Controls.MetroComboBox();
-            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1.SuspendLayout();
             this.mtpTeacherProfile.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -106,7 +106,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 2;
+            this.metroTabControl1.SelectedIndex = 1;
             this.metroTabControl1.Size = new System.Drawing.Size(1049, 449);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
@@ -626,6 +626,31 @@
             this.groupBox5.Text = "Schedule";
             this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
+            // cmbYearlevel
+            // 
+            this.cmbYearlevel.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.cmbYearlevel.FormattingEnabled = true;
+            this.cmbYearlevel.ItemHeight = 19;
+            this.cmbYearlevel.Items.AddRange(new object[] {
+            "1st Year",
+            "2nd Year",
+            "3rd Year",
+            "4th Year"});
+            this.cmbYearlevel.Location = new System.Drawing.Point(133, 93);
+            this.cmbYearlevel.Name = "cmbYearlevel";
+            this.cmbYearlevel.Size = new System.Drawing.Size(158, 25);
+            this.cmbYearlevel.TabIndex = 38;
+            this.cmbYearlevel.UseSelectable = true;
+            // 
+            // metroLabel9
+            // 
+            this.metroLabel9.AutoSize = true;
+            this.metroLabel9.Location = new System.Drawing.Point(55, 93);
+            this.metroLabel9.Name = "metroLabel9";
+            this.metroLabel9.Size = new System.Drawing.Size(74, 19);
+            this.metroLabel9.TabIndex = 37;
+            this.metroLabel9.Text = "Year Level :";
+            // 
             // cmbSectionname
             // 
             this.cmbSectionname.FontSize = MetroFramework.MetroComboBoxSize.Small;
@@ -824,6 +849,31 @@
             this.mtpSubject.VerticalScrollbarHighlightOnWheel = false;
             this.mtpSubject.VerticalScrollbarSize = 10;
             // 
+            // cmbSubYearlvl
+            // 
+            this.cmbSubYearlvl.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.cmbSubYearlvl.FormattingEnabled = true;
+            this.cmbSubYearlvl.ItemHeight = 19;
+            this.cmbSubYearlvl.Items.AddRange(new object[] {
+            "1st Year",
+            "2nd Year",
+            "3rd Year",
+            "4th Year"});
+            this.cmbSubYearlvl.Location = new System.Drawing.Point(142, 73);
+            this.cmbSubYearlvl.Name = "cmbSubYearlvl";
+            this.cmbSubYearlvl.Size = new System.Drawing.Size(197, 25);
+            this.cmbSubYearlvl.TabIndex = 40;
+            this.cmbSubYearlvl.UseSelectable = true;
+            // 
+            // metroLabel10
+            // 
+            this.metroLabel10.AutoSize = true;
+            this.metroLabel10.Location = new System.Drawing.Point(67, 73);
+            this.metroLabel10.Name = "metroLabel10";
+            this.metroLabel10.Size = new System.Drawing.Size(74, 19);
+            this.metroLabel10.TabIndex = 39;
+            this.metroLabel10.Text = "Year Level :";
+            // 
             // cmbSub
             // 
             // 
@@ -865,7 +915,7 @@
             // 
             // btnSubCancel
             // 
-            this.btnSubCancel.Location = new System.Drawing.Point(264, 115);
+            this.btnSubCancel.Location = new System.Drawing.Point(264, 108);
             this.btnSubCancel.Name = "btnSubCancel";
             this.btnSubCancel.Size = new System.Drawing.Size(75, 23);
             this.btnSubCancel.TabIndex = 16;
@@ -874,7 +924,7 @@
             // 
             // btnSubAdd
             // 
-            this.btnSubAdd.Location = new System.Drawing.Point(183, 115);
+            this.btnSubAdd.Location = new System.Drawing.Point(183, 108);
             this.btnSubAdd.Name = "btnSubAdd";
             this.btnSubAdd.Size = new System.Drawing.Size(75, 23);
             this.btnSubAdd.TabIndex = 15;
@@ -969,56 +1019,6 @@
             this.metroLabel7.Size = new System.Drawing.Size(55, 19);
             this.metroLabel7.TabIndex = 4;
             this.metroLabel7.Text = "Search :";
-            // 
-            // metroLabel9
-            // 
-            this.metroLabel9.AutoSize = true;
-            this.metroLabel9.Location = new System.Drawing.Point(55, 93);
-            this.metroLabel9.Name = "metroLabel9";
-            this.metroLabel9.Size = new System.Drawing.Size(74, 19);
-            this.metroLabel9.TabIndex = 37;
-            this.metroLabel9.Text = "Year Level :";
-            // 
-            // cmbYearlevel
-            // 
-            this.cmbYearlevel.FontSize = MetroFramework.MetroComboBoxSize.Small;
-            this.cmbYearlevel.FormattingEnabled = true;
-            this.cmbYearlevel.ItemHeight = 19;
-            this.cmbYearlevel.Items.AddRange(new object[] {
-            "1st Year",
-            "2nd Year",
-            "3rd Year",
-            "4th Year"});
-            this.cmbYearlevel.Location = new System.Drawing.Point(133, 93);
-            this.cmbYearlevel.Name = "cmbYearlevel";
-            this.cmbYearlevel.Size = new System.Drawing.Size(158, 25);
-            this.cmbYearlevel.TabIndex = 38;
-            this.cmbYearlevel.UseSelectable = true;
-            // 
-            // cmbSubYearlvl
-            // 
-            this.cmbSubYearlvl.FontSize = MetroFramework.MetroComboBoxSize.Small;
-            this.cmbSubYearlvl.FormattingEnabled = true;
-            this.cmbSubYearlvl.ItemHeight = 19;
-            this.cmbSubYearlvl.Items.AddRange(new object[] {
-            "1st Year",
-            "2nd Year",
-            "3rd Year",
-            "4th Year"});
-            this.cmbSubYearlvl.Location = new System.Drawing.Point(142, 73);
-            this.cmbSubYearlvl.Name = "cmbSubYearlvl";
-            this.cmbSubYearlvl.Size = new System.Drawing.Size(197, 25);
-            this.cmbSubYearlvl.TabIndex = 40;
-            this.cmbSubYearlvl.UseSelectable = true;
-            // 
-            // metroLabel10
-            // 
-            this.metroLabel10.AutoSize = true;
-            this.metroLabel10.Location = new System.Drawing.Point(67, 73);
-            this.metroLabel10.Name = "metroLabel10";
-            this.metroLabel10.Size = new System.Drawing.Size(74, 19);
-            this.metroLabel10.TabIndex = 39;
-            this.metroLabel10.Text = "Year Level :";
             // 
             // TeacherInformationForm
             // 

@@ -100,7 +100,7 @@ namespace ANSIS_V3
                         sub.YearLevel = cmbSubYearlvl.Text;
                         db.Subjects.InsertOnSubmit(sub);
                         db.SubmitChanges();
-                        MessageBox.Show("Success");
+                        MessageBox.Show("Added Subject");
                         clear();
                         displaySubject();
                     }
@@ -109,7 +109,7 @@ namespace ANSIS_V3
                         var sub = db.Subjects.SingleOrDefault(x => x.SubjectID == id);
                         sub.Subject1 = cmbSub.Text;
                         sub.YearLevel = cmbSubYearlvl.Text;
-                        MessageBox.Show("Success");
+                        MessageBox.Show("Update Subject");
                         db.SubmitChanges();
                         btnSubAdd.Text = "Add";
                         btnSubCancel.Text = "Clear";
@@ -130,7 +130,7 @@ namespace ANSIS_V3
 		private void mtxtSearchsub_TextChanged(object sender, EventArgs e)
 		{
 			var sub = from s in db.Subjects
-					  where s.Subject1.Contains(txtSearchsub.Text)
+					  where s.Subject1.Contains(txtSearchsub.Text) || s.YearLevel.Contains(txtSearchsub.Text)
 					  select s;
 			dgvSubject.DataSource = sub;
 		}

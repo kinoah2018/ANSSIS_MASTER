@@ -184,13 +184,17 @@ namespace ANSIS_V3
             var checkReleased = from p in db.ProcessBooks
                                 where p.StudentID == int.Parse(txtProBookStudID.Text) && p.BookID == int.Parse(cmbProBookAvail.SelectedValue.ToString())
                                 select p;
-            if (checkReleased.Count() > 0)
+            var checkReturn = from p in db.ProcessBooks
+                                where p.StudentID == int.Parse(txtProBookStudID.Text) && p.BookID == int.Parse(cmbProBookAvail.SelectedValue.ToString()) &&p.BookReturn!=null
+                                select p;
+            
+            if (btnProBookRelease.Text == "Release")
             {
-                MessageBox.Show("Book already released to the student!");
-            }
-            else
-            {
-                if (btnProBookRelease.Text == "Release")
+                if (checkReleased.Count() > 0)
+                {
+                    MessageBox.Show("Book already released to the student!");
+                }
+                else
                 {
                     ProcessBook probook = new ProcessBook();
                     probook.StudentID = int.Parse(txtProBookStudID.Text);
@@ -203,6 +207,14 @@ namespace ANSIS_V3
                     MessageBox.Show("Success Adding");
                     ProcessBookClear();
                     DisplayProcessBook();
+                }
+                
+            }
+            else
+            {
+                if (checkReturn.Count() > 0)
+                {
+                    MessageBox.Show("Book already returned to the student!");
                 }
                 else
                 {
@@ -248,23 +260,6 @@ namespace ANSIS_V3
            txtProcBookDistributer.Text = dgvProcessBook.CurrentRow.Cells[5].Value.ToString();
            btnProBookRelease.Text = "Return";
            btnProcBookCLear.Text = "Cancel";
-
-           var displayByID = from pbook in db.ProcessBooks
-                             join stud in db.Students on pbook.StudentID equals stud.StudentID
-                             join b in db.Books on pbook.BookID equals b.BookID
-                             where stud.StudentID.Equals(txtProBookStudID.Text)
-                             select new
-                             {
-                                 pbook.ProcessBookID,
-                                 stud.StudentID,
-                                 Name = stud.Firstname + " " + stud.Lastname,
-                                 stud.YearLevel,
-                                 b.Bookname,
-                                 pbook.Distributer,
-                                 pbook.BookRelease,
-                                 pbook.BookReturn
-                             };
-           dgvProcessBook.DataSource = displayByID;
         }
 
         private void txtProBookStudID_TextChanged(object sender, EventArgs e)
