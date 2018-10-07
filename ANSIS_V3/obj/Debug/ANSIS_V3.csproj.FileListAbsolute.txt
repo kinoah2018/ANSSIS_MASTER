@@ -1,0 +1,99 @@
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\bin\Debug\ANSIS_V3.exe.config
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\bin\Debug\ANSIS_V3.exe
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\bin\Debug\ANSIS_V3.pdb
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.csprojResolveAssemblyReference.cache
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.MainForm.resources
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.Properties.Resources.resources
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.csproj.GenerateResource.Cache
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.exe
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.pdb
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\bin\Debug\MetroFramework.Design.dll
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\bin\Debug\MetroFramework.dll
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\bin\Debug\MetroFramework.Fonts.dll
+c:\users\raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\bin\Debug\MaterialSkin.dll
+C:\Users\Raymundo\documents\visual studio 2015\Projects\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.UserAccountForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\bin\Debug\ANSIS_V3.exe.config
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.exe
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.pdb
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\bin\Debug\ANSIS_V3.exe
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\bin\Debug\ANSIS_V3.pdb
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\bin\Debug\MaterialSkin.dll
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\bin\Debug\MetroFramework.Design.dll
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\bin\Debug\MetroFramework.dll
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.csprojResolveAssemblyReference.cache
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.MainForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.Properties.Resources.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.UserAccountForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.csproj.GenerateResource.Cache
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.StudentInformationForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.ViewSelectStudToGradeForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.ManageSchoolYear.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.TeacherInformationForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.AddScheduleTimeForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.AddBookForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.AddInquiryForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.AddSectionForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.ViewSelectedStudToPayment.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.ViewSelectedStudToRequisitionForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.TransctionForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.MonitoringForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.ReportsForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.mtpInventoryForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\bin\Debug\ANSIS_V3.exe.config
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.exe
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.pdb
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\bin\Debug\ANSIS_V3.exe
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\bin\Debug\ANSIS_V3.pdb
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\bin\Debug\MaterialSkin.dll
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\bin\Debug\MetroFramework.Design.dll
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\bin\Debug\MetroFramework.dll
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.csprojResolveAssemblyReference.cache
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.AddBookForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.AddInquiryForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.AddScheduleTimeForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.AddSectionForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.mtpInventoryForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.MonitoringForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.ReportsForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.ViewSelectedStudToPayment.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.ViewSelectedStudToRequisitionForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.TeacherInformationForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.TransctionForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.ViewSelectStudToGradeForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.MainForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.ManageSchoolYear.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.Properties.Resources.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.StudentInformationForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.UserAccountForm.resources
+C:\Users\Raymundo\Downloads\ANSIS_V3\ANSIS_V3\ANSIS_V3\obj\Debug\ANSIS_V3.csproj.GenerateResource.Cache
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\bin\Debug\ANSIS_V3.exe.config
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.exe
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.pdb
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\bin\Debug\ANSIS_V3.exe
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\bin\Debug\ANSIS_V3.pdb
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\bin\Debug\MaterialSkin.dll
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\bin\Debug\MetroFramework.Design.dll
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\bin\Debug\MetroFramework.dll
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.csprojResolveAssemblyReference.cache
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.AddBookForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.AddInquiryForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.AddScheduleTimeForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.AddSectionForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.mtpInventoryForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.ManageSchoolyear.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.MonitoringForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.ReportsForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.TeacherInformationForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.MainForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.Properties.Resources.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.StudentInformationForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.UserAccountForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.csproj.GenerateResource.Cache
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.TransactionForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.PaymentReceipt.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.Login.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.FirstTimeLoginForm.resources
+C:\Users\Mr.Pickles\Desktop\ANSIS-master\ANSIS_V3\obj\Debug\ANSIS_V3.ForgotPasswordForm.resources
