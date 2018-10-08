@@ -852,9 +852,13 @@ namespace ANSIS_V3
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtPayments.Text) || !string.IsNullOrWhiteSpace(txtAmount.Text) || !string.IsNullOrWhiteSpace(cmbSchoolYear.Text))
+            if (string.IsNullOrWhiteSpace(txtPayments.Text) || string.IsNullOrWhiteSpace(txtAmount.Text) || string.IsNullOrWhiteSpace(cmbSchoolYear.Text))
             {
-                if (btnAdd.Text=="Add")
+                MessageBox.Show("Input all fields");
+            }
+            else
+            {
+                if (btnAdd.Text == "Add")
                 {
                     Payment stud = new Payment();
                     stud.Payment1 = txtPayments.Text;
@@ -876,14 +880,12 @@ namespace ANSIS_V3
                     MessageBox.Show("Successfully Update");
                     PayClear();
                     DisplayPayDet();
+                    txtPayments.ReadOnly = true;
                     btnAdd.Text = "Add";
                     btnClear.Text = "Clear";
                 }
                
-            }
-            else
-            {
-                MessageBox.Show("Input all fields");
+               
             }
          
         }
@@ -901,6 +903,7 @@ namespace ANSIS_V3
             txtAmount.Text = dgvPayments.CurrentRow.Cells[2].Value.ToString();
             txtSyID.Text = dgvPayments.CurrentRow.Cells[3].Value.ToString();
             cmbSchoolYear.Text = dgvPayments.CurrentRow.Cells[4].Value.ToString();
+            txtPayments.ReadOnly = true;
             btnAdd.Text = "Update";
             btnClear.Text = "Cancel";
         }

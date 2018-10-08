@@ -19,19 +19,51 @@ namespace ANSIS_V3
         DataClassDataContext db = new DataClassDataContext();
         private void InventoryForm_Load(object sender, EventArgs e)
         {
+            DisplayInvent();
+        }
+        public void DisplayInvent()
+        {
+           
             var books = from b in db.Books
                         select b;
             foreach (var book in books)
             {
-                var releasedBooks=from pb in db.ProcessBooks
-                                  where pb.BookID==book.BookID
-                                  select pb;
+                var releasedBooks = from pb in db.ProcessBooks
+                                    where pb.BookID == book.BookID
+                                    select pb;
                 var returnedBooks = from pb in db.ProcessBooks
-                                    where pb.BookID == book.BookID && pb.BookReturn!=null
+                                    where pb.BookID == book.BookID && pb.BookReturn != null
                                     select pb;
                 int quatity = book.BookQuantity - releasedBooks.Count() + returnedBooks.Count();
-                dgvBookInven.Rows.Add(book.Bookname,quatity, releasedBooks.Count(),returnedBooks.Count());
+                dgvBookInven.Rows.Add(book.Bookname, quatity, releasedBooks.Count(), returnedBooks.Count());
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            //if (txtSearch.Text!="")
+            //{
+            //    dgvBookInven.Rows.Clear();
+            //    var books = from b in db.Books
+            //                select b;
+            //    foreach (var book in books)
+            //    {
+            //        var releasedBooks = from pb in db.ProcessBooks
+            //                            where pb.BookID == book.BookID || book.Bookname.Contains(txtSearch.Text)
+            //                            select pb;
+            //        var returnedBooks = from pb in db.ProcessBooks
+            //                            where pb.BookID == book.BookID && pb.BookReturn != null
+            //                            select pb;
+            //        int quatity = book.BookQuantity - releasedBooks.Count() + returnedBooks.Count();
+            //        dgvBookInven.Rows.Add(book.Bookname, quatity, releasedBooks.Count(), returnedBooks.Count());
+            //    }
+            //}
+            //else
+            //{
+            //    //dgvBookInven.Rows.Clear();
+            //    DisplayInvent();
+            //}
+           
         }
     }
 }

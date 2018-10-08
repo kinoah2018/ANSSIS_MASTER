@@ -136,38 +136,46 @@ namespace ANSIS_V3
 		}
 		private void mbtnAdd_Click(object sender, EventArgs e)
 		{
-			if (mbtnAdd.Text == "Add")
-			{
-				Teacher teach = new Teacher();
-				teach.Firstname = mtxtFname.Text;
-				teach.Middlename = mtxtMname.Text;
-				teach.Lastname = mtxtLname.Text;
-				teach.ContactNumber = mtxtContact.Text;
-				teach.Status = mcmbstatus.Text;
-				teach.SubjectID = int.Parse(cmbSubject.SelectedValue.ToString());
-				db.Teachers.InsertOnSubmit(teach);
-				db.SubmitChanges();
-				MessageBox.Show("Added");
-				displayTeacher();
-				clearTeacher();
-			}
-			else
-			{
-				var teach=db.Teachers.SingleOrDefault(x=>x.TeacherID== tid);
-				teach.Firstname = mtxtFname.Text;
-				teach.Middlename = mtxtMname.Text;
-				teach.Lastname = mtxtLname.Text;
-				teach.ContactNumber = mtxtContact.Text;
-				teach.Status = mcmbstatus.Text;
-				teach.SubjectID =int.Parse(cmbSubject.SelectedValue.ToString());
-				db.SubmitChanges();
-				MessageBox.Show("Updated");
-				displayTeacher();
-				clearTeacher();
-				mbtnAdd.Text = "Add";
-				mbtnClear.Text = "Clear";
-                mcmbstatus.Enabled = false;
-			}
+            if (String.IsNullOrWhiteSpace(mtxtFname.Text) || String.IsNullOrWhiteSpace(mtxtLname.Text) || String.IsNullOrWhiteSpace(mtxtMname.Text) || String.IsNullOrWhiteSpace(mtxtContact.Text) || String.IsNullOrWhiteSpace(cmbSubject.Text) || String.IsNullOrWhiteSpace(mcmbstatus.Text))
+            {
+                MessageBox.Show("Input all fields");
+            }
+            else
+            {
+                if (mbtnAdd.Text == "Add")
+                {
+                    Teacher teach = new Teacher();
+                    teach.Firstname = mtxtFname.Text;
+                    teach.Middlename = mtxtMname.Text;
+                    teach.Lastname = mtxtLname.Text;
+                    teach.ContactNumber = mtxtContact.Text;
+                    teach.Status = mcmbstatus.Text;
+                    teach.SubjectID = int.Parse(cmbSubject.SelectedValue.ToString());
+                    db.Teachers.InsertOnSubmit(teach);
+                    db.SubmitChanges();
+                    MessageBox.Show("Added");
+                    displayTeacher();
+                    clearTeacher();
+                }
+                else
+                {
+                    var teach = db.Teachers.SingleOrDefault(x => x.TeacherID == tid);
+                    teach.Firstname = mtxtFname.Text;
+                    teach.Middlename = mtxtMname.Text;
+                    teach.Lastname = mtxtLname.Text;
+                    teach.ContactNumber = mtxtContact.Text;
+                    teach.Status = mcmbstatus.Text;
+                    teach.SubjectID = int.Parse(cmbSubject.SelectedValue.ToString());
+                    db.SubmitChanges();
+                    MessageBox.Show("Updated");
+                    displayTeacher();
+                    clearTeacher();
+                    mbtnAdd.Text = "Add";
+                    mbtnClear.Text = "Clear";
+                    mcmbstatus.Enabled = false;
+                }
+            }
+		
 		}
 		public void clearTeacher()
 		{
@@ -272,81 +280,89 @@ namespace ANSIS_V3
 
         private void btnSchedAdd_Click(object sender, EventArgs e)
         {
-            if (btnSchedAdd.Text =="Add")
+            if (string.IsNullOrWhiteSpace(mtxtTeachername.Text) || string.IsNullOrWhiteSpace(cmbYearlevel.Text) || string.IsNullOrWhiteSpace(cmbSectionname.Text) || string.IsNullOrWhiteSpace(txtSubject.Text) || string.IsNullOrWhiteSpace(mcmbTimeStartENd.Text))
             {
-                var dispthsched = from sc in db.Schedules
-                                  join t in db.Teachers on sc.TeacherID equals t.TeacherID
-                                  join sec in db.Sections on sc.SectionID equals sec.SectionID
-                                  join sub in db.Subjects on t.SubjectID equals sub.SubjectID
-                                  join tsched in db.TimeSchedules on sc.TimeScheduleID equals tsched.TimeScheduleID
-                                  where t.TeacherID==int.Parse(txtTID.Text) && sub.SubjectID==int.Parse(cmbSubject.SelectedValue.ToString()) && tsched.TimeScheduleID==int.Parse(mcmbTimeStartENd.SelectedValue.ToString()) && sec.SectionID==int.Parse(cmbSectionname.SelectedValue.ToString()) && sc.YearLevel == cmbYearlevel.Text
-                                  select new
-                                  {
-                                      ID = sc.ScheduleID,
-                                      TID = t.TeacherID,
-                                      Name = t.Firstname + " " + t.Lastname,
-                                      Section = sec.Section1,
-                                      Subject = sub.Subject1,
-                                      Schedule = tsched.TimeStart + " - " + tsched.TimeEnd
-                                  };
-                if (dispthsched.Count() > 0)
-                {
-                    MessageBox.Show("Duplicate schedule!");
-                }
-                else
-                {
-                    Schedule sched = new Schedule();
-                    sched.TeacherID = Convert.ToInt32(txtTID.Text);
-                    sched.SectionID = Convert.ToInt32(cmbSectionname.SelectedValue);
-                    sched.YearLevel = cmbYearlevel.Text;
-                    sched.TimeScheduleID = Convert.ToInt32(mcmbTimeStartENd.SelectedValue);
-                    db.Schedules.InsertOnSubmit(sched);
-                    db.SubmitChanges();
-                    MessageBox.Show("Success ADD");
-                    SchedClear();
-                    dgvSchedule.DataSource = sched;
-                    displayteacherSched();
-                }
-                
+                MessageBox.Show("Input all fields");
             }
             else
             {
-                var dispthsched = from sc in db.Schedules
-                                  join t in db.Teachers on sc.TeacherID equals t.TeacherID
-                                  join sec in db.Sections on sc.SectionID equals sec.SectionID
-                                  join sub in db.Subjects on t.SubjectID equals sub.SubjectID
-                                  join tsched in db.TimeSchedules on sc.TimeScheduleID equals tsched.TimeScheduleID
-                                  where t.TeacherID == int.Parse(txtTID.Text) && sub.SubjectID == int.Parse(cmbSubject.SelectedValue.ToString()) && tsched.TimeScheduleID == int.Parse(mcmbTimeStartENd.SelectedValue.ToString()) && sec.SectionID == int.Parse(cmbSectionname.SelectedValue.ToString()) && sc.YearLevel == cmbYearlevel.Text
-                                  select new
-                                  {
-                                      ID = sc.ScheduleID,
-                                      TID = t.TeacherID,
-                                      Name = t.Firstname + " " + t.Lastname,
-                                      Section = sec.Section1,
-                                      Subject = sub.Subject1,
-                                      Schedule = tsched.TimeStart + " - " + tsched.TimeEnd
-                                  };
-                if (dispthsched.Count() > 0)
+                if (btnSchedAdd.Text == "Add")
                 {
-                    MessageBox.Show("Duplicate schedule!");
+                    var dispthsched = from sc in db.Schedules
+                                      join t in db.Teachers on sc.TeacherID equals t.TeacherID
+                                      join sec in db.Sections on sc.SectionID equals sec.SectionID
+                                      join sub in db.Subjects on t.SubjectID equals sub.SubjectID
+                                      join tsched in db.TimeSchedules on sc.TimeScheduleID equals tsched.TimeScheduleID
+                                      where t.TeacherID == int.Parse(txtTID.Text) && sub.SubjectID == int.Parse(cmbSubject.SelectedValue.ToString()) && tsched.TimeScheduleID == int.Parse(mcmbTimeStartENd.SelectedValue.ToString()) && sec.SectionID == int.Parse(cmbSectionname.SelectedValue.ToString()) && sc.YearLevel == cmbYearlevel.Text
+                                      select new
+                                      {
+                                          ID = sc.ScheduleID,
+                                          TID = t.TeacherID,
+                                          Name = t.Firstname + " " + t.Lastname,
+                                          Section = sec.Section1,
+                                          Subject = sub.Subject1,
+                                          Schedule = tsched.TimeStart + " - " + tsched.TimeEnd
+                                      };
+                    if (dispthsched.Count() > 0)
+                    {
+                        MessageBox.Show("Duplicate schedule!");
+                    }
+                    else
+                    {
+                        Schedule sched = new Schedule();
+                        sched.TeacherID = Convert.ToInt32(txtTID.Text);
+                        sched.SectionID = Convert.ToInt32(cmbSectionname.SelectedValue);
+                        sched.YearLevel = cmbYearlevel.Text;
+                        sched.TimeScheduleID = Convert.ToInt32(mcmbTimeStartENd.SelectedValue);
+                        db.Schedules.InsertOnSubmit(sched);
+                        db.SubmitChanges();
+                        MessageBox.Show("Success ADD");
+                        SchedClear();
+                        dgvSchedule.DataSource = sched;
+                        displayteacherSched();
+                    }
+
                 }
                 else
                 {
-                    var updatesched = db.Schedules.SingleOrDefault(x => x.ScheduleID == schedID);
-                    updatesched.TeacherID = int.Parse(txtTID.Text);
-                    updatesched.SectionID = int.Parse(cmbSectionname.SelectedValue.ToString());
-                    updatesched.YearLevel = cmbYearlevel.Text;
-                    updatesched.TimeScheduleID = int.Parse(mcmbTimeStartENd.SelectedValue.ToString());
-                    db.SubmitChanges();
-                    MessageBox.Show("Success UPDATE");
-                    dgvSchedule.DataSource = updatesched;
-                    displayteacherSched();
-                    SchedClear();
-                    btnSchedAdd.Text = "Add";
-                    btnSchedClear.Text = "Clear";
+                    var dispthsched = from sc in db.Schedules
+                                      join t in db.Teachers on sc.TeacherID equals t.TeacherID
+                                      join sec in db.Sections on sc.SectionID equals sec.SectionID
+                                      join sub in db.Subjects on t.SubjectID equals sub.SubjectID
+                                      join tsched in db.TimeSchedules on sc.TimeScheduleID equals tsched.TimeScheduleID
+                                      where t.TeacherID == int.Parse(txtTID.Text) && sub.SubjectID == int.Parse(txtSubject.Text) && tsched.TimeScheduleID == int.Parse(mcmbTimeStartENd.SelectedValue.ToString()) && sec.SectionID == int.Parse(cmbSectionname.SelectedValue.ToString()) && sc.YearLevel == cmbYearlevel.Text
+                                      select new
+                                      {
+                                          ID = sc.ScheduleID,
+                                          TID = t.TeacherID,
+                                          Name = t.Firstname + " " + t.Lastname,
+                                          Section = sec.Section1,
+                                          Subject = sub.Subject1,
+                                          Schedule = tsched.TimeStart + " - " + tsched.TimeEnd
+                                      };
+                    if (dispthsched.Count() > 0)
+                    {
+                        MessageBox.Show("Duplicate schedule!");
+                    }
+                    else
+                    {
+                        var updatesched = db.Schedules.SingleOrDefault(x => x.ScheduleID == schedID);
+                        updatesched.TeacherID = int.Parse(txtTID.Text);
+                        updatesched.SectionID = int.Parse(cmbSectionname.SelectedValue.ToString());
+                        updatesched.YearLevel = cmbYearlevel.Text;
+                        updatesched.TimeScheduleID = int.Parse(mcmbTimeStartENd.SelectedValue.ToString());
+                        db.SubmitChanges();
+                        MessageBox.Show("Success UPDATE");
+                        dgvSchedule.DataSource = updatesched;
+                        displayteacherSched();
+                        SchedClear();
+                        btnSchedAdd.Text = "Add";
+                        btnSchedClear.Text = "Clear";
+                    }
+
                 }
-                                   
             }
+           
         }
         public void SchedClear()
         {

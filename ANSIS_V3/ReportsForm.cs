@@ -111,7 +111,7 @@ namespace ANSIS_V3
                         IsHagbong = true;
                     }
                     var avepersub = from sg in db.StudentGrades
-                                    where sg.YearLevel == "4th Year" && sg.StudentID == grad.StudentID && sg.SubjectID == s.SubjectID
+                                    where sg.YearLevel == "4th Year" && sg.StudentID == grad.StudentID && sg.SubjectID == s.SubjectID 
                                     select sg;
                     foreach (var avp in avepersub)
                     {

@@ -76,10 +76,10 @@
       <Column Name="SectionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SchoolyearID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Student_StudentGrade" Member="StudentGrades" ThisKey="StudentID" OtherKey="StudentID" Type="StudentGrade" />
-      <Association Name="Student_RequiOfRequirement" Member="RequiOfRequirements" ThisKey="StudentID" OtherKey="StudentID" Type="RequiOfRequirement" />
       <Association Name="Student_ProcessBook" Member="ProcessBooks" ThisKey="StudentID" OtherKey="StudentID" Type="ProcessBook" />
-      <Association Name="Student_Inquiry" Member="Inquiries" ThisKey="StudentID" OtherKey="StudentID" Type="Inquiry" />
       <Association Name="Student_StudentPayment" Member="StudentPayments" ThisKey="StudentID" OtherKey="StudentID" Type="StudentPayment" />
+      <Association Name="Student_Inquiry" Member="Inquiries" ThisKey="StudentID" OtherKey="StudentID" Type="Inquiry" />
+      <Association Name="Student_RequiOfRequirement" Member="RequiOfRequirements" ThisKey="StudentID" OtherKey="StudentID" Type="RequiOfRequirement" />
       <Association Name="Schoolyear_Student" Member="Schoolyear" ThisKey="SchoolyearID" OtherKey="SchoolyearID" Type="Schoolyear" IsForeignKey="true" />
       <Association Name="Section_Student" Member="Section" ThisKey="SectionID" OtherKey="SectionID" Type="Section" IsForeignKey="true" />
     </Type>
@@ -143,7 +143,6 @@
       <Column Name="IsFirstLogin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="UserTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="UserAccount_UserSecurity" Member="UserSecurities" ThisKey="UserAccountID" OtherKey="UserAccountID" Type="UserSecurity" />
-      <Association Name="UserAccount_RequiOfRequirement" Member="RequiOfRequirements" ThisKey="UserAccountID" OtherKey="UserAccountID" Type="RequiOfRequirement" />
       <Association Name="UserType_UserAccount" Member="UserType" ThisKey="UserTypeID" OtherKey="UserTypeID" Type="UserType" IsForeignKey="true" />
     </Type>
   </Table>
@@ -154,19 +153,6 @@
       <Column Name="Answer" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="UserAccountID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="UserAccount_UserSecurity" Member="UserAccount" ThisKey="UserAccountID" OtherKey="UserAccountID" Type="UserAccount" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.RequiOfRequirement" Member="RequiOfRequirements">
-    <Type Name="RequiOfRequirement">
-      <Column Name="RequiOfRequirementID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SchoolyearID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Requirement" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="UserAccountID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DateRelease" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Association Name="Schoolyear_RequiOfRequirement" Member="Schoolyear" ThisKey="SchoolyearID" OtherKey="SchoolyearID" Type="Schoolyear" IsForeignKey="true" />
-      <Association Name="Student_RequiOfRequirement" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
-      <Association Name="UserAccount_RequiOfRequirement" Member="UserAccount" ThisKey="UserAccountID" OtherKey="UserAccountID" Type="UserAccount" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Book" Member="Books">
@@ -193,16 +179,6 @@
       <Association Name="Student_ProcessBook" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Inquiry" Member="Inquiries">
-    <Type Name="Inquiry">
-      <Column Name="InquiryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="InquiryConcern" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="InqAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="Student_Inquiry" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.StudentPayment" Member="StudentPayments">
     <Type Name="StudentPayment">
       <Column Name="StudentPaymentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -212,6 +188,29 @@
       <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="Payment_StudentPayment" Member="Payment" ThisKey="PaymentID" OtherKey="PaymentID" Type="Payment" IsForeignKey="true" />
       <Association Name="Student_StudentPayment" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Inquiry" Member="Inquiries">
+    <Type Name="Inquiry">
+      <Column Name="InquiryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InquiryType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Inquiry" Member="Inquiry1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InqAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Student_Inquiry" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RequiOfRequirement" Member="RequiOfRequirements">
+    <Type Name="RequiOfRequirement">
+      <Column Name="RequiOfRequirementID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SchoolyearID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Requirement" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Releasedby" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateRelease" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Schoolyear_RequiOfRequirement" Member="Schoolyear" ThisKey="SchoolyearID" OtherKey="SchoolyearID" Type="Schoolyear" IsForeignKey="true" />
+      <Association Name="Student_RequiOfRequirement" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

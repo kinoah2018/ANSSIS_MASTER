@@ -74,26 +74,26 @@ namespace ANSIS_V3
         }
         public void RORCLEAR()
         {
+            txtStudID.Clear();
             txtStudName.Clear();
             txtShoolYear.Clear();
             txtYearLevel.Clear();
             cmbRequireType.SelectedIndex = -1;
+            txtReleaseBy.Clear();
         }
 
         public void DisplayRequisitionOfRequire()
         {
             var displayRequiOfRequire = from ror in db.RequiOfRequirements
                                         join s in db.Students on ror.StudentID equals s.StudentID
-                                        join sy in db.Schoolyears on s.SchoolyearID equals sy.SchoolyearID 
-                                        join u in db.UserAccounts on ror.UserAccountID equals u.UserAccountID
-                                        select new
+                                        join sy in db.Schoolyears on s.SchoolyearID equals sy.SchoolyearID                                         select new
                                         {
                                             ID=ror.RequiOfRequirementID,
                                             Name = s.Firstname + " " + s.Lastname,
                                             SchoolYear=sy.Year,
                                             s.YearLevel,
                                             ror.Requirement,
-                                            ReleasedBy= u.Firstname+" "+u.Lastname,
+                                            ror.Releasedby,
                                             ror.DateRelease
                                         };
             dgvRequiOfRequire.DataSource = displayRequiOfRequire;
@@ -110,6 +110,10 @@ namespace ANSIS_V3
                 Isselection = false;
                 DisplayRequisitionOfRequire();
             }
+            else
+            {
+
+            }
         }
         
         private void btnRORAdd_Click(object sender, EventArgs e)
@@ -117,6 +121,10 @@ namespace ANSIS_V3
             var rorExist = from r in db.RequiOfRequirements
                            where r.Requirement == cmbRequireType.Text && r.StudentID == int.Parse(txtStudID.Text)
                            select r;
+            if (string.IsNullOrWhiteSpace(txtStudName.Text) || string.IsNullOrWhiteSpace(txtYearLevel.Text))
+            {
+                MessageBox.Show("Input all Fields");
+            }
             if (rorExist.Count() > 0)
             {
                 DialogResult dialogResult = MessageBox.Show("Would you like to go to payment tab?", "Second issue!", MessageBoxButtons.YesNo);
@@ -142,16 +150,16 @@ namespace ANSIS_V3
             }
             else
             {
-                RequiOfRequirement ror = new RequiOfRequirement();
-                ror.StudentID = int.Parse(txtStudID.Text);
-                ror.Requirement = cmbRequireType.Text;
-                ror.UserAccountID = int.Parse(txtReleaseBy.Text);
-                ror.DateRelease = DateTime.Now;
-                db.RequiOfRequirements.InsertOnSubmit(ror);
-                db.SubmitChanges();
-                MessageBox.Show("Successfully Add");
-                DisplayRequisitionOfRequire();
-                RORCLEAR();
+                    RequiOfRequirement ror = new RequiOfRequirement();
+                    ror.StudentID = int.Parse(txtStudID.Text);
+                    ror.Requirement = cmbRequireType.Text;
+                    ror.Releasedby = txtReleaseBy.Text;
+                    ror.DateRelease = DateTime.Now;
+                    db.RequiOfRequirements.InsertOnSubmit(ror);
+                    db.SubmitChanges();
+                    MessageBox.Show("Successfully Add");
+                    DisplayRequisitionOfRequire();
+                    RORCLEAR();   
             }
         }
 
@@ -186,7 +194,6 @@ namespace ANSIS_V3
                 var searchror = from ror in db.RequiOfRequirements
                                 join s in db.Students on ror.StudentID equals s.StudentID
                                 join sy in db.Schoolyears on s.SchoolyearID equals sy.SchoolyearID
-                                join u in db.UserAccounts on ror.UserAccountID equals u.UserAccountID
                                 where s.Firstname.Contains(txtRequiOfRequireSearch.Text) || sy.Year.Contains(txtRequiOfRequireSearch.Text) || s.Lastname.Contains(txtRequiOfRequireSearch.Text) || s.YearLevel.Contains(txtRequiOfRequireSearch.Text) || ror.Requirement.Contains(txtRequiOfRequireSearch.Text)
                                 select new
                                 {
@@ -195,7 +202,7 @@ namespace ANSIS_V3
                                     SchoolYear = sy.Year,
                                     s.YearLevel,
                                     ror.Requirement,
-                                    Releaseby = u.Firstname + " " + u.Lastname,
+                                    ror.Releasedby,
                                     ror.DateRelease
                                 };
                 dgvRequiOfRequire.DataSource = searchror;

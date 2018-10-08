@@ -21,6 +21,7 @@ namespace ANSIS_V3
         DataClassDataContext db = new DataClassDataContext();
         private void MonitoringForm_Load(object sender, EventArgs e)
         {
+
             displayBalance();
             DisplayRequirments();
             displayBMI();
@@ -31,8 +32,21 @@ namespace ANSIS_V3
         public void Inquiry()
         {
             var displayinq = from Inq in db.Inquiries
-                             select Inq;
+                             join s in db.Students on Inq.StudentID equals s.StudentID
+                             where Inq.InquiryType == "Announcement And Events"
+                             select new
+                             {
+                                 Inq.InquiryID,
+                                 Inq.InquiryType,
+                                 Inq.Inquiry1,
+                                 s.StudentID,
+                                 Name = s.Firstname + " " + s.Lastname,
+                                 Inq.Status,
+                                 Inq.InqAnswer
+                             };
             dgvAnnouncement.DataSource = displayinq;
+
+
         }
         public void DisplayStudBOOKS()
         {
@@ -51,12 +65,13 @@ namespace ANSIS_V3
                                         pbook.BookReturn
                                     };
             dgvBooksStud.DataSource = processbooksearch;
+
+
         }
         public void DisplayRequisitionOfRequire()
         {
             var displayRequiOfRequire = from ror in db.RequiOfRequirements
                                         join s in db.Students on ror.StudentID equals s.StudentID
-                                        join u in db.UserAccounts on ror.UserAccountID equals u.UserAccountID
                                         join sy in db.Schoolyears on s.SchoolyearID equals sy.SchoolyearID
                                         select new
                                         {
@@ -65,10 +80,12 @@ namespace ANSIS_V3
                                             SchoolYear = sy.Year,
                                             s.YearLevel,
                                             ror.Requirement,
-                                            ReleaseBy = u.Firstname+" "+u.Lastname,
+                                            ror.Releasedby,
                                             ror.DateRelease
                                         };
             dgvRequisitionofRequi.DataSource = displayRequiOfRequire;
+
+
         }
         public void DisplayRequirments()
         {
@@ -191,39 +208,85 @@ namespace ANSIS_V3
                        select s;
             foreach (var s in stud)
             {
-                var balance = from p in db.Payments join sc in db.Schoolyears on p.SchoolyearID equals sc.SchoolyearID
-                          where p.Payment1 != "Book Penalty" && p.Payment1 != "Second Issue of Certificate"
-                          select p;
-            totalbalance = 0;
-            foreach (var bal in balance)
-            {
-                totalbalance += double.Parse(bal.Amount.ToString());
-            }
-            var unreturnedbooks = from p in db.ProcessBooks
-                              where p.StudentID == s.StudentID && p.BookReturn == null
+                var balance = from p in db.Payments
+                              join sc in db.Schoolyears on p.SchoolyearID equals sc.SchoolyearID
+                              where p.Payment1 != "Book Penalty" && p.Payment1 != "Second Issue of Certificate"
                               select p;
-            var bookamount = (from p in db.Payments
-                              where p.Payment1 == "Book Penalty"
-                              select p).FirstOrDefault();
-            bookpenalty = unreturnedbooks.Count() * double.Parse(bookamount.Amount.ToString());
-            var studpay = from sp in db.StudentPayments
-                          join p in db.Payments on sp.PaymentID equals p.PaymentID
-                          where p.Payment1 != "Second Issue of Certificate" && sp.StudentID==s.StudentID
-                          select sp;
-            payed = 0;
-            foreach (var studp in studpay)
-            {
-                payed += double.Parse(studp.Amount.ToString());
-            }
-            totalbalance= ((totalbalance + bookpenalty) - payed);
-            dgvBalanceofStud.Rows.Add(s.StudentID, s.Firstname + " " + s.Lastname, totalbalance);
+                totalbalance = 0;
+                foreach (var bal in balance)
+                {
+                    totalbalance += double.Parse(bal.Amount.ToString());
+                }
+                var unreturnedbooks = from p in db.ProcessBooks
+                                      where p.StudentID == s.StudentID && p.BookReturn == null
+                                      select p;
+                var bookamount = (from p in db.Payments
+                                  where p.Payment1 == "Book Penalty"
+                                  select p).FirstOrDefault();
+                bookpenalty = unreturnedbooks.Count() * double.Parse(bookamount.Amount.ToString());
+                var studpay = from sp in db.StudentPayments
+                              join p in db.Payments on sp.PaymentID equals p.PaymentID
+                              where p.Payment1 != "Second Issue of Certificate" && sp.StudentID == s.StudentID
+                              select sp;
+                payed = 0;
+                foreach (var studp in studpay)
+                {
+                    payed += double.Parse(studp.Amount.ToString());
+                }
+                totalbalance = ((totalbalance + bookpenalty) - payed);
+                dgvBalanceofStud.Rows.Add(s.StudentID, s.Firstname + " " + s.Lastname, totalbalance);
             }
         }
 
         private void txtBalanceSearch_TextChanged(object sender, EventArgs e)
         {
-            dgvBalanceofStud.Rows.Clear();
             
+            if (txtBalanceSearch.Text!="")
+            {
+                dgvBalanceofStud.Rows.Clear();
+                double totalbalance;
+                double bookpenalty;
+                double payed;
+                var stud = from s in db.Students
+                           where s.Firstname.Contains(txtBalanceSearch.Text) || s.Lastname.Contains(txtBalanceSearch.Text)
+                           select s;
+                foreach (var s in stud)
+                {
+                    var balance = from p in db.Payments
+                                  join sc in db.Schoolyears on p.SchoolyearID equals sc.SchoolyearID
+                                  where p.Payment1 != "Book Penalty" && p.Payment1 != "Second Issue of Certificate"
+                                  select p;
+                    totalbalance = 0;
+                    foreach (var bal in balance)
+                    {
+                        totalbalance += double.Parse(bal.Amount.ToString());
+                    }
+                    var unreturnedbooks = from p in db.ProcessBooks
+                                          where p.StudentID == s.StudentID && p.BookReturn == null
+                                          select p;
+                    var bookamount = (from p in db.Payments
+                                      where p.Payment1 == "Book Penalty"
+                                      select p).FirstOrDefault();
+                    bookpenalty = unreturnedbooks.Count() * double.Parse(bookamount.Amount.ToString());
+                    var studpay = from sp in db.StudentPayments
+                                  join p in db.Payments on sp.PaymentID equals p.PaymentID
+                                  where p.Payment1 != "Second Issue of Certificate" && sp.StudentID == s.StudentID
+                                  select sp;
+                    payed = 0;
+                    foreach (var studp in studpay)
+                    {
+                        payed += double.Parse(studp.Amount.ToString());
+                    }
+                    totalbalance = ((totalbalance + bookpenalty) - payed);
+                    dgvBalanceofStud.Rows.Add(s.StudentID, s.Firstname + " " + s.Lastname, totalbalance);
+                }
+            }
+            else
+            {
+                dgvBalanceofStud.Rows.Clear();
+                displayBalance();
+            }
+
         }
 
         private void cmbHonorYear_SelectedIndexChanged(object sender, EventArgs e)
@@ -233,6 +296,199 @@ namespace ANSIS_V3
         public void displayBMI()
         {
             var studbmi = from s in db.Students
+                          select s;
+
+            dgvStudHealthStat.Rows.Clear();
+            foreach (var s in studbmi)
+            {
+                double bmi = 0;
+                double height = 0;
+                double weight = 0;
+                string bmires = "";
+                height = double.Parse(s.Height.ToString());
+                weight = double.Parse(s.Weight.ToString());
+                height = height / 3.28;
+                bmi = Math.Round((weight / Math.Pow((height), 2)), 2);
+                if (bmi < 15)
+                {
+                    bmires = "Very severly underweight";
+                }
+                else if (bmi >= 15 && bmi <= 16)
+                {
+                    bmires = "Severly underweight";
+                }
+                else if (bmi >= 16 && bmi <= 18.5)
+                {
+                    bmires = "Underweight";
+                }
+                else if (bmi >= 18.5 && bmi <= 25)
+                {
+                    bmires = "Normal";
+                }
+                else if (bmi >= 25 && bmi < 30)
+                {
+                    bmires = "Overweight";
+                }
+                else if (bmi >= 30 && bmi < 35)
+                {
+                    bmires = "Moderately obese";
+                }
+                else if (bmi >= 35 && bmi < 40)
+                {
+                    bmires = "Severly Obese";
+                }
+                else if (bmi >= 40)
+                {
+                    bmires = "Very severly obese";
+                }
+                int systolic;
+                int diastolic;
+                systolic = int.Parse(s.Systolic.ToString());
+                diastolic = int.Parse(s.Diastolic.ToString());
+                var bpres = "";
+                if (systolic <= 90 && diastolic <= 60)
+                {
+                    bpres = "Low Blood Pressure";
+                }
+                else if ((systolic >= 90 && systolic <= 120) && (diastolic >= 60 && diastolic <= 80))
+                {
+                    bpres = "Ideal and Helthy Blood Pressure";
+                }
+                else if ((systolic >= 120 && systolic <= 140) && (diastolic >= 80 && diastolic <= 90))
+                {
+                    bpres = "Normal blood pressure ";
+                }
+                else if (systolic >= 140 && diastolic >= 90)
+                {
+                    bpres = "High blood pressure";
+                }
+                else if (systolic >= 140 || diastolic >= 110)
+                {
+                    bpres = "High blood pressure";
+                }
+                else if (systolic <= 90 || diastolic <= 60)
+                {
+                    bpres = "Low blood pressure";
+                }
+                dgvStudHealthStat.Rows.Add(s.Firstname + " " + s.Lastname, bmires, bpres);
+
+            }
+        }
+
+        private void txtRequiofRequiSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (txtRequiofRequiSearch.Text!="")
+            {
+                var searchror = from ror in db.RequiOfRequirements
+                                join s in db.Students on ror.StudentID equals s.StudentID
+                                join sy in db.Schoolyears on s.SchoolyearID equals sy.SchoolyearID
+                                where s.Firstname.Contains(txtRequiofRequiSearch.Text) || sy.Year.Contains(txtRequiofRequiSearch.Text) || s.Lastname.Contains(txtRequiofRequiSearch.Text) || s.YearLevel.Contains(txtRequiofRequiSearch.Text) || ror.Requirement.Contains(txtRequiofRequiSearch.Text)
+                                select new
+                                {
+                                    ID = ror.RequiOfRequirementID,
+                                    Name = s.Firstname + " " + s.Lastname,
+                                    SchoolYear = sy.Year,
+                                    s.YearLevel,
+                                    ror.Requirement,
+                                    ror.Releasedby,
+                                    ror.DateRelease
+                                };
+                dgvRequisitionofRequi.DataSource = searchror;
+            }
+            else
+            {
+                DisplayRequisitionOfRequire();
+            }
+          
+        }
+
+        private void txtProBookSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtProBookSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (txtProBookSearch.Text!="")
+            {
+                var pbsearch = from pbook in db.ProcessBooks
+                               join stud in db.Students on pbook.StudentID equals stud.StudentID
+                               join b in db.Books on pbook.BookID equals b.BookID
+                               where stud.Firstname.Contains(txtProBookSearch.Text) || stud.Lastname.Contains(txtProBookSearch.Text) || stud.YearLevel.Contains(txtProBookSearch.Text) ||
+                                               b.Bookname.Contains(txtProBookSearch.Text)
+                               select new
+                               {
+                                   pbook.ProcessBookID,
+                                   stud.StudentID,
+                                   Name = stud.Firstname + " " + stud.Lastname,
+                                   stud.YearLevel,
+                                   b.Bookname,
+                                   pbook.Distributer,
+                                   pbook.BookRelease,
+                                   pbook.BookReturn
+                               };
+                dgvBooksStud.DataSource = pbsearch;
+            }
+            else
+            {
+                DisplayStudBOOKS();
+            }
+           
+        }
+
+        private void txtAnnEventsSearch_TextChanged(object sender, EventArgs e)
+        {
+           if (txtAnnEventsSearch.Text!="")
+	        {
+                var searhInq = from Inq in db.Inquiries
+                                join s in db.Students on Inq.StudentID equals s.StudentID
+                               where Inq.InquiryType.Contains("Announcement And Events") && s.Firstname.Contains(txtAnnEventsSearch.Text)
+                                 select new
+                                 {
+                                     Inq.InquiryID,
+                                     Inq.InquiryType,
+                                     Inq.Inquiry1,
+                                     s.StudentID,
+                                     Name = s.Firstname + " " + s.Lastname,
+                                     Inq.Status,
+                                     Inq.InqAnswer
+                                 };
+                dgvAnnouncement.DataSource = searhInq;
+	        }
+           else
+	            {
+                    Inquiry();
+	            }
+        }
+
+        private void txtRequirementStud_TextChanged(object sender, EventArgs e)
+        {
+            if (txtRequirementStud.Text !="")
+            {
+                var searchReq = from d in db.Students
+                                where d.Firstname.Contains(txtRequirementStud.Text) || d.Lastname.Contains(txtRequirementStud.Text)
+                                let Fullname = d.Firstname + " " + d.Lastname
+                                select new
+                                {
+                                    Fullname,
+                                    d.Form137,
+                                    d.Form138,
+                                    d.GoodMoral,
+                                    d.NSO
+                                };
+                dgvRequirment.DataSource = searchReq;
+            }
+            else
+            {
+                DisplayRequirments();
+            }
+            
+        }
+
+        private void txtStudHealthSearch_TextChanged(object sender, EventArgs e)
+        {
+            var studbmi = from s in db.Students
+                          where s.Firstname.Contains(txtStudHealthSearch.Text) || s.Lastname.Contains(txtStudHealthSearch.Text)
                           select s;
 
             dgvStudHealthStat.Rows.Clear();

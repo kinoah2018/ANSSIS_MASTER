@@ -155,9 +155,6 @@ namespace ANSIS_V3
                          };
             dgvCompBook.DataSource = search;
         }
-        private void mtxtStudID_Leave(object sender, EventArgs e)
-        {
-        }
 
         private void mtxtYearLevel_TextChanged(object sender, EventArgs e)
         {

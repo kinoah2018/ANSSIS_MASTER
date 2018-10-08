@@ -134,14 +134,15 @@ create table RequiOfRequirement
 	StudentID int foreign key references Student(StudentID),
 	SchoolyearID int foreign key references Schoolyear(SchoolyearID),
 	Requirement  varchar(50) not null,
-	UserAccountID int foreign key references UserAccount(UserAccountID),
+	Releasedby varchar(50) not null,
 	DateRelease date not null
 )
-
+select * from Inquiry
 create table Inquiry
 (
 	InquiryID int primary key identity(1,1),
-	InquiryConcern  varchar(50) not null,
+	InquiryType varchar(50) not null,
+	Inquiry  varchar(50) not null,
 	StudentID int foreign key references Student(StudentID),
 	Status varchar(50) not null,
 	InqAnswer varchar(50)null
@@ -178,6 +179,7 @@ create table StudentPayment
 )
 
 select * from UserAccount
+select * from Inquiry
 select * from Schedule
 select * from StudPayment
 select * from StudentPayment
