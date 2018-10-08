@@ -173,6 +173,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(354, 288);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
@@ -308,6 +309,8 @@
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.metroLabel3);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FirstTimeLoginForm";
             this.Text = "First Time Login Form";
             this.Load += new System.EventHandler(this.FirstTimeLoginForm_Load);

@@ -62,46 +62,10 @@ namespace ANSIS_V3
             txtBookAuthor.Clear();
             dtpBookPublished.ResetText();
             txtBookQuantity.Clear();
+           
         }
 
-        private void btnCompBookAdd_Click(object sender, EventArgs e)
-        {
-            if (btnCompBookAdd.Text=="Add")
-            {
-                
-                Book b = new Book();
-                b.Bookname = txtBookname.Text;
-                b.BookDesciption = txtBookDescrip.Text;
-                b.YearLevel = cmbYearLevel.Text;
-                b.BookAuthor = txtBookAuthor.Text;
-                b.BookReleased =  DateTime.Parse(dtpBookPublished.Text);
-                b.BookQuantity = int.Parse(txtBookQuantity.Text);
-                db.Books.InsertOnSubmit(b);
-                db.SubmitChanges();
-                MessageBox.Show("Add");
-                BookClear();
-                dgvCompBook.DataSource = b;
-                DisplayBook();
-            }
-            else
-            {
-                var updatebook = db.Books.SingleOrDefault(x => x.BookID == int.Parse(dgvCompBook.CurrentRow.Cells[0].Value.ToString()));
-                updatebook.BookID = BookID;
-                updatebook.Bookname = txtBookname.Text;
-                updatebook.BookDesciption = txtBookDescrip.Text;
-                updatebook.YearLevel = cmbYearLevel.Text;
-                updatebook.BookAuthor = txtBookAuthor.Text;
-                updatebook.BookQuantity = int.Parse(txtBookQuantity.Text);
-                db.SubmitChanges();
-                MessageBox.Show("Update");
-                BookClear();
-                dgvCompBook.DataSource = updatebook;
-                DisplayBook();
-                btnCompBookAdd.Text = "Add";
-                btnCompBookClear.Text = "Clear";
-
-            }
-        }
+     
 
         private void dgvCompBook_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -201,7 +165,7 @@ namespace ANSIS_V3
                     probook.BookReturn = null;
                     db.ProcessBooks.InsertOnSubmit(probook);
                     db.SubmitChanges();
-                    MessageBox.Show("Success Adding");
+                    MessageBox.Show("Release");
                     ProcessBookClear();
                     DisplayProcessBook();
                 }
@@ -219,7 +183,7 @@ namespace ANSIS_V3
                     var procbooksupdate = db.ProcessBooks.SingleOrDefault(x => x.ProcessBookID == ProcessBookID);
                     procbooksupdate.BookReturn = DateTime.Now;
                     db.SubmitChanges();
-                    MessageBox.Show("Success Update");
+                    MessageBox.Show("Return");
                     ProcessBookClear();
                     DisplayProcessBook();
                     btnProBookRelease.Text = "Release";
@@ -367,6 +331,45 @@ namespace ANSIS_V3
             if (char.IsLetter(e.KeyChar))
             {
                 e.Handled = true;
+
+            }
+        }
+
+        private void btnCompBookAdd_Click(object sender, EventArgs e)
+        {
+            if (btnCompBookAdd.Text == "Add")
+            {
+
+                Book b = new Book();
+                b.Bookname = txtBookname.Text;
+                b.BookDesciption = txtBookDescrip.Text;
+                b.YearLevel = cmbYearLevel.Text;
+                b.BookAuthor = txtBookAuthor.Text;
+                b.BookReleased = DateTime.Parse(dtpBookPublished.Text);
+                b.BookQuantity = int.Parse(txtBookQuantity.Text);
+                db.Books.InsertOnSubmit(b);
+                db.SubmitChanges();
+                MessageBox.Show("Add");
+                BookClear();
+                dgvCompBook.DataSource = b;
+                DisplayBook();
+            }
+            else
+            {
+                var updatebook = db.Books.SingleOrDefault(x => x.BookID == int.Parse(dgvCompBook.CurrentRow.Cells[0].Value.ToString()));
+                updatebook.BookID = BookID;
+                updatebook.Bookname = txtBookname.Text;
+                updatebook.BookDesciption = txtBookDescrip.Text;
+                updatebook.YearLevel = cmbYearLevel.Text;
+                updatebook.BookAuthor = txtBookAuthor.Text;
+                updatebook.BookQuantity = int.Parse(txtBookQuantity.Text);
+                db.SubmitChanges();
+                MessageBox.Show("Update");
+                BookClear();
+                dgvCompBook.DataSource = updatebook;
+                DisplayBook();
+                btnCompBookAdd.Text = "Add";
+                btnCompBookClear.Text = "Clear";
 
             }
         }

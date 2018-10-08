@@ -20,8 +20,12 @@ namespace ANSIS_V3
             InitializeComponent();
         }
 		DataClassDataContext db = new DataClassDataContext();
+        bool isFormLoad = false;
         private void AddSectionForm_Load(object sender, EventArgs e)
         {
+            isFormLoad = true;
+            cmbFilterYearLevel.SelectedIndex = 0;
+            isFormLoad = false;
 			displaySection();
 			var teacher = from t in db.Teachers
 						  select new { ID = t.TeacherID, Name = t.Firstname + " " + t.Lastname };
@@ -31,10 +35,14 @@ namespace ANSIS_V3
 		}
 		public void displaySection()
 		{
-			var section = from s in db.Sections 
-                          join t in db.Teachers on s.TeacherID equals t.TeacherID
-						  select new {s.SectionID,s.Section1,s.Capacity,s.YearLevel,Adviser=t.Firstname+" "+t.Lastname};
-			mdgvAddSection.DataSource = section;
+            if (isFormLoad==false)
+            {
+                var section = from s in db.Sections
+                              join t in db.Teachers on s.TeacherID equals t.TeacherID
+                              where s.YearLevel == cmbFilterYearLevel.Text
+                              select new { s.SectionID, s.Section1, s.Capacity, s.YearLevel, Adviser = t.Firstname + " " + t.Lastname };
+                mdgvAddSection.DataSource = section;
+            }
 		}
         private void mdgvAddSection_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -139,6 +147,11 @@ namespace ANSIS_V3
         private void AddSectionForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             
+        }
+
+        private void cmbFilterYearLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            displaySection();
         }
 	}
 }

@@ -83,7 +83,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(988, 393);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
@@ -175,7 +175,7 @@
             // 
             this.dtpBookPublished.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpBookPublished.Location = new System.Drawing.Point(124, 215);
-            this.dtpBookPublished.MinimumSize = new System.Drawing.Size(4, 29);
+            this.dtpBookPublished.MinimumSize = new System.Drawing.Size(0, 29);
             this.dtpBookPublished.Name = "dtpBookPublished";
             this.dtpBookPublished.Size = new System.Drawing.Size(191, 29);
             this.dtpBookPublished.TabIndex = 65;
@@ -704,7 +704,6 @@
             this.txtProBookStudID.TextChanged += new System.EventHandler(this.txtProBookStudID_TextChanged);
             this.txtProBookStudID.Click += new System.EventHandler(this.txtProBookStudID_Click);
             this.txtProBookStudID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProBookStudID_KeyPress);
-            this.txtProBookStudID.Leave += new System.EventHandler(this.btnCompBookAdd_Click);
             // 
             // txtProBookStudname
             // 

@@ -24,7 +24,7 @@ namespace ANSIS_V3
         {
             InitializeComponent();
             printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
-            this.sname = studname;
+            sname = studname;
             this.patype = paymenttype;
             coh = cashonhand;
             amnt = amount;

@@ -61,6 +61,10 @@ namespace ANSIS_V3
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtStudName.Text)||string.IsNullOrWhiteSpace(txtInqDesc.Text)||cmbInqType.Text=="")
+            {
+                MessageBox.Show("Input all fields");
+            }
             if (btnAdd.Text == "Add")
             {
                 Inquiry inq = new Inquiry();
@@ -117,6 +121,15 @@ namespace ANSIS_V3
             txtInqAnswer.Text = dgvInquiry.CurrentRow.Cells[6].Value.ToString();
             btnAdd.Text = "Update";
             btnClear.Text = "Cancel";
+            if (cmbStatus.SelectedIndex==0)
+            {
+                txtInqAnswer.ReadOnly = true;
+
+            }
+            else
+            {
+                txtInqAnswer.ReadOnly = false;
+            }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -187,9 +200,26 @@ namespace ANSIS_V3
 
         private void cmbStatus_Leave(object sender, EventArgs e)
         {
-            if (cmbStatus.Text != "Pending ")
+            if (cmbStatus.SelectedIndex==0)
+            {
+                txtInqAnswer.ReadOnly = true;
+            }
+            else
             {
                 txtInqAnswer.ReadOnly = false;
+            }
+        }
+
+        private void txtInqAnswer_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void txtSTID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

@@ -28,6 +28,7 @@ namespace ANSIS_V3
             DisplayRequisitionOfRequire();
             DisplayStudBOOKS();
             Inquiry();
+            displayHonor();
         }
         public void Inquiry()
         {
@@ -112,6 +113,7 @@ namespace ANSIS_V3
                 double ave = 0;
                 bool hasLackingGrade = false;
                 var sub = from s in db.Subjects
+                          where s.YearLevel == cmbHonorYear.Text
                           select s;
                 foreach (var s in sub)
                 {

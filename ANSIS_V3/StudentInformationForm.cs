@@ -921,5 +921,15 @@ namespace ANSIS_V3
                 PayClear();
             }
         }
+
+        private void mcmbYearLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var sec = from s in db.Sections
+                      where s.YearLevel == mcmbYearLevel.Text
+                      select s;
+            mcmbSecname.DataSource = sec;
+            mcmbSecname.ValueMember = "SectionID";
+            mcmbSecname.DisplayMember = "Section1";
+        }
 	}
 }

@@ -183,7 +183,7 @@ namespace ANSIS_V3
 			mtxtMname.Clear();
 			mtxtLname.Clear();
 			mtxtContact.Clear();
-			mcmbstatus.SelectedIndex = -1;
+			mcmbstatus.SelectedIndex = 0;
 			cmbSubject.SelectedIndex = -1;
 		}
 		public void displayTeacher()

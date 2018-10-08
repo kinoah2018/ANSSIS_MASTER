@@ -165,6 +165,8 @@
             this.Controls.Add(this.dgvBookInven);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "mtpInventoryForm";
             this.Text = "Book Inventory Form";
             this.Load += new System.EventHandler(this.InventoryForm_Load);

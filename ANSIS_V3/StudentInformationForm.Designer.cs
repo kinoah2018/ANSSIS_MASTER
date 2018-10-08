@@ -196,7 +196,7 @@
             this.mtcStInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mtcStInfo.Location = new System.Drawing.Point(20, 60);
             this.mtcStInfo.Name = "mtcStInfo";
-            this.mtcStInfo.SelectedIndex = 1;
+            this.mtcStInfo.SelectedIndex = 0;
             this.mtcStInfo.Size = new System.Drawing.Size(1154, 449);
             this.mtcStInfo.TabIndex = 0;
             this.mtcStInfo.UseSelectable = true;
@@ -584,6 +584,7 @@
             this.mcmbYearLevel.Size = new System.Drawing.Size(177, 25);
             this.mcmbYearLevel.TabIndex = 24;
             this.mcmbYearLevel.UseSelectable = true;
+            this.mcmbYearLevel.SelectedIndexChanged += new System.EventHandler(this.mcmbYearLevel_SelectedIndexChanged);
             // 
             // metroLabel21
             // 

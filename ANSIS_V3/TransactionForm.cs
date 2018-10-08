@@ -79,7 +79,6 @@ namespace ANSIS_V3
             txtShoolYear.Clear();
             txtYearLevel.Clear();
             cmbRequireType.SelectedIndex = -1;
-            txtReleaseBy.Clear();
         }
 
         public void DisplayRequisitionOfRequire()
@@ -135,7 +134,7 @@ namespace ANSIS_V3
                     txtPayStudname.Text = txtStudName.Text;
                     txtPayShoolYear.Text = txtShoolYear.Text;
                     txtPayYearLevel.Text = txtYearLevel.Text;
-                    cmbPaymentType.Text = " Second Issue of Certifacate";
+                    cmbPaymentType.Text = "Second Issue of Certificate";
                     var studpayment = from s in db.StudentPayments join p in db.Payments on s.PaymentID equals p.PaymentID
                                       where s.StudentID == int.Parse(txtSTID.Text)
                                       select new { p.Payment1, s.Amount, s.Date };
@@ -368,6 +367,50 @@ namespace ANSIS_V3
                 }
                 else
                 {
+                    if (cmbPaymentType.Text == "Second Issue of Certificate")
+                    {
+                        StudentPayment sp = new StudentPayment();
+                        sp.StudentID = int.Parse(txtSTID.Text);
+                        sp.Amount = decimal.Parse(txtAmount.Text);
+                        sp.PaymentID = int.Parse(cmbPaymentType.SelectedValue.ToString());
+                        sp.Date = DateTime.Now;
+                        db.StudentPayments.InsertOnSubmit(sp);
+                        db.SubmitChanges();
+                        MessageBox.Show("Successfully Payed!");
+                        var studpayment = from s in db.StudentPayments
+                                          join p in db.Payments on s.PaymentID equals p.PaymentID
+                                          where s.StudentID == int.Parse(txtSTID.Text)
+                                          select new { p.Payment1, s.Amount, s.Date };
+                        dgvPayment.DataSource = studpayment;
+                        getTotalBalance();
+                        PaymentReceipt pr = new PaymentReceipt(txtSTID.Text, txtPayStudname.Text, cmbPaymentType.Text, txtCOH.Text, txtAmount.Text, txtChanges.Text);
+                        pr.ShowDialog();
+                        txtCOH.Text = "0";
+                        txtAmount.Text = "0";
+                        txtChanges.Text = "0";
+                    }
+                    else if (cmbPaymentType.Text == "Book Penalty")
+                    {
+                        StudentPayment sp = new StudentPayment();
+                        sp.StudentID = int.Parse(txtSTID.Text);
+                        sp.Amount = decimal.Parse(txtAmount.Text);
+                        sp.PaymentID = int.Parse(cmbPaymentType.SelectedValue.ToString());
+                        sp.Date = DateTime.Now;
+                        db.StudentPayments.InsertOnSubmit(sp);
+                        db.SubmitChanges();
+                        MessageBox.Show("Successfully Payed!");
+                        var studpayment = from s in db.StudentPayments
+                                          join p in db.Payments on s.PaymentID equals p.PaymentID
+                                          where s.StudentID == int.Parse(txtSTID.Text)
+                                          select new { p.Payment1, s.Amount, s.Date };
+                        dgvPayment.DataSource = studpayment;
+                        getTotalBalance();
+                        PaymentReceipt pr = new PaymentReceipt(txtSTID.Text, txtPayStudname.Text, cmbPaymentType.Text, txtCOH.Text, txtAmount.Text, txtChanges.Text);
+                        pr.ShowDialog();
+                        txtCOH.Text = "0";
+                        txtAmount.Text = "0";
+                        txtChanges.Text = "0";
+                    }else
                     if (double.Parse(txtAmount.Text) > amounts)
                     {
                         MessageBox.Show("Amount is invalid!");

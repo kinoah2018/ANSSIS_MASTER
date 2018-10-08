@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mtxtYearLevel = new MetroFramework.Controls.MetroComboBox();
             this.mcmbSubject = new MetroFramework.Controls.MetroLabel();
             this.metroLabel27 = new MetroFramework.Controls.MetroLabel();
@@ -44,6 +44,8 @@
             this.metroLabel26 = new MetroFramework.Controls.MetroLabel();
             this.mdgvAddSection = new MetroFramework.Controls.MetroGrid();
             this.cmbAdviser = new MetroFramework.Controls.MetroComboBox();
+            this.cmbFilterYearLevel = new MetroFramework.Controls.MetroComboBox();
+            this.lblFileterYearLevel = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.mdgvAddSection)).BeginInit();
             this.SuspendLayout();
             // 
@@ -231,23 +233,23 @@
             this.mdgvAddSection.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.mdgvAddSection.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.mdgvAddSection.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.mdgvAddSection.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.mdgvAddSection.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.mdgvAddSection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.mdgvAddSection.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.mdgvAddSection.DefaultCellStyle = dataGridViewCellStyle5;
             this.mdgvAddSection.EnableHeadersVisualStyles = false;
             this.mdgvAddSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mdgvAddSection.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -255,14 +257,14 @@
             this.mdgvAddSection.Name = "mdgvAddSection";
             this.mdgvAddSection.ReadOnly = true;
             this.mdgvAddSection.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.mdgvAddSection.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.mdgvAddSection.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.mdgvAddSection.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.mdgvAddSection.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.mdgvAddSection.Size = new System.Drawing.Size(672, 240);
@@ -281,11 +283,40 @@
             this.cmbAdviser.TabIndex = 48;
             this.cmbAdviser.UseSelectable = true;
             // 
+            // cmbFilterYearLevel
+            // 
+            this.cmbFilterYearLevel.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.cmbFilterYearLevel.FormattingEnabled = true;
+            this.cmbFilterYearLevel.ItemHeight = 19;
+            this.cmbFilterYearLevel.Items.AddRange(new object[] {
+            "1st Year",
+            "2nd Year",
+            "3rd Year",
+            "4th Year"});
+            this.cmbFilterYearLevel.Location = new System.Drawing.Point(470, 30);
+            this.cmbFilterYearLevel.Name = "cmbFilterYearLevel";
+            this.cmbFilterYearLevel.Size = new System.Drawing.Size(187, 25);
+            this.cmbFilterYearLevel.TabIndex = 49;
+            this.cmbFilterYearLevel.UseSelectable = true;
+            this.cmbFilterYearLevel.SelectedIndexChanged += new System.EventHandler(this.cmbFilterYearLevel_SelectedIndexChanged);
+            // 
+            // lblFileterYearLevel
+            // 
+            this.lblFileterYearLevel.AutoSize = true;
+            this.lblFileterYearLevel.BackColor = System.Drawing.Color.Transparent;
+            this.lblFileterYearLevel.Location = new System.Drawing.Point(352, 32);
+            this.lblFileterYearLevel.Name = "lblFileterYearLevel";
+            this.lblFileterYearLevel.Size = new System.Drawing.Size(112, 19);
+            this.lblFileterYearLevel.TabIndex = 50;
+            this.lblFileterYearLevel.Text = "Select Year Level :";
+            // 
             // AddSectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1025, 326);
+            this.Controls.Add(this.lblFileterYearLevel);
+            this.Controls.Add(this.cmbFilterYearLevel);
             this.Controls.Add(this.cmbAdviser);
             this.Controls.Add(this.mtxtSearch);
             this.Controls.Add(this.metroLabel26);
@@ -325,5 +356,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel26;
         private MetroFramework.Controls.MetroGrid mdgvAddSection;
 		private MetroFramework.Controls.MetroComboBox cmbAdviser;
+        private MetroFramework.Controls.MetroComboBox cmbFilterYearLevel;
+        private MetroFramework.Controls.MetroLabel lblFileterYearLevel;
 	}
 }

@@ -169,6 +169,7 @@ create table StudentGrade
 select * from Payment
 select * from Schoolyear
 select * from StudentPayment
+delete from StudentPayment where StudentID=2
 create table StudentPayment
 (
 	StudentPaymentID int primary key identity(1,1),
